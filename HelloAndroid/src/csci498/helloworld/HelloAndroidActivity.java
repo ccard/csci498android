@@ -13,10 +13,6 @@ public class HelloAndroidActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText("Hello Chris!");
-        setContentView(textView);
     }
     
 }
