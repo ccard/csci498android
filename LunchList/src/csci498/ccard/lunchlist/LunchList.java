@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class LunchList extends Activity {
@@ -20,6 +21,19 @@ public class LunchList extends Activity {
         Button save = (Button)findViewById(R.id.save);
         
         save.setOnClickListener(onSave);
+        
+        //creating new radio buttons
+        RadioGroup g = new RadioGroup(this);
+        RadioButton take = new RadioButton(this);
+        RadioButton site = new RadioButton(this);
+        RadioButton deliv = new RadioButton(this);
+        take.setText("Take-Out2");
+        site.setText("Sit-down2");
+        deliv.setText("Delivery 2");
+        g.addView(take);
+        g.addView(site);
+        g.addView(deliv);
+        setContentView(R.id.types);
     }
 
     private View.OnClickListener onSave = new View.OnClickListener() {
@@ -30,6 +44,7 @@ public class LunchList extends Activity {
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
 			
+			//creates functionality for radiogroup added via xml
 			RadioGroup types = (RadioGroup)findViewById(R.id.types);
 			
 			switch(types.getCheckedRadioButtonId())
