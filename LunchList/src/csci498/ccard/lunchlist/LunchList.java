@@ -24,24 +24,27 @@ public class LunchList extends Activity {
         
         save.setOnClickListener(onSave);
         
-        //creating new radio buttons
-        RadioGroup g = new RadioGroup(this);
-        RadioButton take = new RadioButton(this);
-        RadioButton site = new RadioButton(this);
-        RadioButton deliv = new RadioButton(this);
-        take.setText("Take-Out2");
-        site.setText("Sit-down2");
-        deliv.setText("Delivery 2");
-        g.addView(take);
-        g.addView(site);
-        g.addView(deliv);
-        TableRow t = (TableRow)findViewById(R.id.tableRow1);
-        t.addView(g);
+//        //creating new radio buttons
+//        RadioGroup g = new RadioGroup(this);
+//        RadioButton take = new RadioButton(this);
+//        RadioButton site = new RadioButton(this);
+//        RadioButton deliv = new RadioButton(this);
+//        //names new radio buttons
+//        take.setText("Take-Out2");
+//        site.setText("Sit-down2");
+//        deliv.setText("Delivery 2");
+//        //adds radiobuttons to group and to the table row
+//        g.addView(take);
+//        g.addView(site);
+//        g.addView(deliv);
+//        TableRow t = (TableRow)findViewById(R.id.tableRow1);
+//        t.addView(g);
     }
 
     private View.OnClickListener onSave = new View.OnClickListener() {
 		
 		public void onClick(View v) {
+			Restaurant r = new Restaurant();
 			EditText name=(EditText)findViewById(R.id.name);
 			EditText address=(EditText)findViewById(R.id.addr);
 			r.setName(name.getText().toString());
