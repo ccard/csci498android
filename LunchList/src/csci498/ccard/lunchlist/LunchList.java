@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TableRow;
 
 public class LunchList extends Activity {
 
@@ -33,7 +34,8 @@ public class LunchList extends Activity {
         g.addView(take);
         g.addView(site);
         g.addView(deliv);
-        setContentView(R.id.types);
+        TableRow t = (TableRow)findViewById(R.id.tableRow1);
+        t.addView(g);
     }
 
     private View.OnClickListener onSave = new View.OnClickListener() {
