@@ -9,10 +9,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TableRow;
+import java.util.*;
 
 public class LunchList extends Activity {
 
-	Restaurant r = new Restaurant();
+	List<Restaurant> model = new ArrayList<Restaurant>();
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
