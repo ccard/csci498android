@@ -85,11 +85,18 @@
     </TableLayout>
     <!-- end of table layout -->
 
+	<Spinner
+        android:id="@+id/restaurants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/details"
+        android:layout_alignParentTop="true" />
+	<!--  
     <ListView
         android:id="@+id/restaurants"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/details"
         android:layout_alignParentTop="true" />
-
+-->
 </RelativeLayout> <!-- </ScrollView> -->

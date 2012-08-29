@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TableRow;
 import java.util.*;
 
@@ -31,8 +32,7 @@ public class LunchList extends Activity {
         //adds and on click listener
         save.setOnClickListener(onSave);
         
-        //gets the listview from main.xml
-        ListView list = (ListView)findViewById(R.id.restaurants);
+        Spinner list = (Spinner)findViewById(R.id.restaurants);
         
         //sets addapter with this activity passed in a simple list item
         //and the list of restaurants
