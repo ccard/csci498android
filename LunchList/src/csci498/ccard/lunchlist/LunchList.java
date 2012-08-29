@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,8 +19,19 @@ public class LunchList extends Activity {
 
 	//stores list of restaurants
 	List<Restaurant> model = new ArrayList<Restaurant>();
+	
+	//list of previous addresses 
+	public static List<String> addresses = new ArrayList<String>();
+	
 	//Array adapter for restaurants
 	ArrayAdapter<Restaurant> adapter = null;
+	
+	//Array adapter for autocomplete adress
+	ArrayAdapter<String> autoAdapter = null;
+	
+	//access to the auto complete text view so we
+	//can update it with reacently added addresses
+	 AutoCompleteTextView acText = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +52,15 @@ public class LunchList extends Activity {
         			android.R.layout.simple_list_item_1, model);
         
         list.setAdapter(adapter);
+        
+        acText = (AutoCompleteTextView)findViewById(R.id.addr);
+        
+        addresses.add("the Mall");
+        //creates new list addapter for autocomplete text view
+        autoAdapter = new ArrayAdapter<String>(this,
+        							android.R.layout.simple_dropdown_item_1line, addresses);
+        
+        acText.setAdapter(autoAdapter);
         
   /*      //creating new radio buttons
         RadioGroup g = new RadioGroup(this);
@@ -64,8 +85,8 @@ public class LunchList extends Activity {
 			
 			Restaurant r = new Restaurant();
 			
-			EditText name=(EditText)findViewById(R.id.name);
-			EditText address=(EditText)findViewById(R.id.addr);
+			EditText name = (EditText)findViewById(R.id.name);
+			AutoCompleteTextView address = (AutoCompleteTextView)findViewById(R.id.addr);
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
 			
@@ -84,6 +105,14 @@ public class LunchList extends Activity {
 					r.setType("delivery");
 					break;
 			}
+			name.setText("");
+			address.setText("");
+		
+			//adds new component to the adapter then sets acText's adapter to the
+			//newly modified adapter
+			autoAdapter.add(r.getAddress());
+			acText.setAdapter(autoAdapter);
+			
 			//adds the restaurant the user just created to the adapter
 			adapter.add(r);
 		}

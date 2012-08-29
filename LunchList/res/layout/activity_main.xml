@@ -28,7 +28,7 @@
 
         <TableRow>
             <TextView android:text="Address:" />
-            <EditText android:id="@+id/addr" />
+            <AutoCompleteTextView android:id="@+id/addr" />
         </TableRow>
 
         <TableRow
