@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">-->
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent">
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:stretchColumns="1" >
+    android:layout_height="match_parent" >
 
-    <TableRow>
+    <TableLayout
+        android:id="@+id/details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:stretchColumns="1" >
 
-        <TextView android:text="Name:" />
+        <TableRow>
+            <TextView android:text="Name:" />
+            <EditText android:id="@+id/name" />
+        </TableRow>
 
-        <EditText android:id="@+id/name" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </TableRow>
-
-    <TableRow>
-
-        <TextView android:text="Address:" />
-
-        <EditText android:id="@+id/addr" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" >
-
-        <TextView
-            android:id="@+id/textView1"
+        <TableRow
+            android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Type:" />
-			
+            android:layout_height="wrap_content" >
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="Address:" />
+            <EditText android:id="@+id/addr" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type:" />
+
             <RadioGroup
                 android:id="@+id/types"
                 android:layout_width="wrap_content"
@@ -62,21 +65,31 @@
                     android:layout_height="wrap_content"
                     android:text="Delivery" />
             </RadioGroup>
+            <!-- End of Radio group for restaurant types -->
+        </TableRow>
 
-        
-    </TableRow>
-
-     <!-- <TableRow
+        <!--
+        <TableRow
         android:id="@+id/tableRow2"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" > -->
-            
-<Button android:id="@+id/save"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:text="Save"
-/>
-<!--</TableRow>-->
+        android:layout_height="match_parent" >
+        -->
 
-</TableLayout>
- <!--</ScrollView>-->
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save" />
+        <!-- </TableRow> -->
+
+    </TableLayout>
+    <!-- end of table layout -->
+
+    <ListView
+        android:id="@+id/restaurants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/details"
+        android:layout_alignParentTop="true" />
+
+</RelativeLayout> <!-- </ScrollView> -->
