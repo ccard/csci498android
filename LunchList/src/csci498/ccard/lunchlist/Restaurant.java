@@ -1,3 +1,8 @@
+/**
+ * Chris Card
+ * 8/28/12
+ * This class stores a restaurant by its type name and address
+ */
 package csci498.ccard.lunchlist;
 
 public class Restaurant {

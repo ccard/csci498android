@@ -1,7 +1,13 @@
+/**
+ * Chris Card
+ * 8/28/12
+ * This class conatins the main activity for this project
+ */
 package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TableRow;
+import android.widget.TextView;
 import java.util.*;
 
 public class LunchList extends Activity {
@@ -61,6 +68,11 @@ public class LunchList extends Activity {
         							android.R.layout.simple_dropdown_item_1line, addresses);
         
         acText.setAdapter(autoAdapter);
+        
+        //set text font of the type label
+        TextView type = (TextView)findViewById(R.id.types_title);
+        Typeface font = Typeface.create("Arial", Typeface.ITALIC);
+        type.setTypeface(font);
         
   /*      //creating new radio buttons
         RadioGroup g = new RadioGroup(this);
