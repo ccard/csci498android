@@ -54,7 +54,7 @@ public class LunchList extends Activity {
         //adds and on click listener
         save.setOnClickListener(onSave);
         
-        Spinner list = (Spinner)findViewById(R.id.restaurants);
+        ListView list = (ListView)findViewById(R.id.restaurants);
         
         //sets addapter with this activity passed in a simple list item
         //and the list of restaurants
@@ -147,26 +147,32 @@ public class LunchList extends Activity {
 		public View getView(int position, View convertView, ViewGroup parent)
 		{
 			View row = convertView;
+			RestaurantHolder holder = null;
 			
 			if(row == null)
 			{
 				LayoutInflater inflater = getLayoutInflater();
+				
 				row = inflater.inflate(R.layout.row, null);
+				holder = new RestaurantHolder(row);
+				row.setTag(holder);
+			}
+			else
+			{
+				holder = (RestaurantHolder)row.getTag();
 			}
 			
-			Restaurant r = model.get(position);
-			
-			((TextView)row.findViewById(R.id.title)).setText(r.getName());
-			((TextView)row.findViewById(R.id.address)).setText(r.getAddress());
-			
-			ImageView icon = (ImageView)row.findViewById(R.id.icon);
-			
-			
+			holder.populateForm(model.get(position));
 			
 			return row;
 		}
 	}
 	
+	/**
+	 * This static class is used to populate the RestaurantAdapter rows
+	 * @author Chris
+	 *
+	 */
 	static class RestaurantHolder{
 		
 		private TextView name = null;
