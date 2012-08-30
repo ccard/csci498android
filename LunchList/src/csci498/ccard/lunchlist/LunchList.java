@@ -154,7 +154,10 @@ public class LunchList extends Activity {
 			{
 				LayoutInflater inflater = getLayoutInflater();
 				
-				switch (getItemViewType(position))
+				/*
+				 * determines what kind of row layout should be used
+				 */
+		/*		switch (getItemViewType(position))
 				{
 					case 1:
 						row = inflater.inflate(R.layout.row, null);
@@ -171,9 +174,9 @@ public class LunchList extends Activity {
 						holder = new RestaurantHolder(row);
 						row.setTag(holder);
 						break;
-				}
-			/*	row = inflater.inflate(R.layout.row, null);
-				holder = new RestaurantHolder(row); */
+				}*/
+				row = inflater.inflate(R.layout.row, null);
+				holder = new RestaurantHolder(row);
 				row.setTag(holder);
 			}
 			else
@@ -192,7 +195,7 @@ public class LunchList extends Activity {
 		 * @param position of the item in the list
 		 * @return 1 for sit_down, 2 for take_out, 3 for delivery
 		 */
-		public int getItemViewType(int position)
+	/*	public int getItemViewType(int position)
 		{
 			if(model.get(position).getType().equals("sit_down"))
 			{
@@ -211,7 +214,7 @@ public class LunchList extends Activity {
 		public int getViewTypeCount()
 		{
 			return 3;
-		}
+		}*/
 	}
 	
 	/**
