@@ -167,6 +167,27 @@ public class LunchList extends Activity {
 			
 			return row;
 		}
+		
+		public int getItemViewType(int position)
+		{
+			if(model.get(position).getType().equals("sit_down"))
+			{
+				return 1;
+			}
+			else if(model.get(position).getType().equals("take_out"))
+			{
+				return 2;
+			}
+			else
+			{
+				return 3;
+			}
+		}
+		
+		public int getViewTypeCount()
+		{
+			return 3;
+		}
 	}
 	
 	/**
