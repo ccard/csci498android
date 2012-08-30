@@ -132,6 +132,11 @@ public class LunchList extends Activity {
 		}
 	};
     
+	/**
+	 * This class holds the RestaurantAdapter for populating the listview with the restaurants
+	 * @author Chris
+	 *
+	 */
 	class RestaurantAdapter extends ArrayAdapter<Restaurant>{
 		
 		RestaurantAdapter()
@@ -156,6 +161,30 @@ public class LunchList extends Activity {
 			
 			ImageView icon = (ImageView)row.findViewById(R.id.icon);
 			
+			
+			
+			return row;
+		}
+	}
+	
+	static class RestaurantHolder{
+		
+		private TextView name = null;
+		private TextView address = null;
+		private ImageView icon = null;
+		
+		RestaurantHolder(View row)
+		{
+			name = (TextView)row.findViewById(R.id.title);
+			address = (TextView)row.findViewById(R.id.address);
+			icon = (ImageView)row.findViewById(R.id.icon);
+		}
+		
+		void populateForm(Restaurant r)
+		{
+			name.setText(r.getName());
+			address.setText(r.getAddress());
+			
 			if(r.getType().equals("sit_down"))
 			{
 				icon.setImageResource(R.drawable.ball_red);
@@ -168,8 +197,6 @@ public class LunchList extends Activity {
 			{
 				icon.setImageResource(R.drawable.ball_green);
 			}
-			
-			return row;
 		}
 	}
 }
