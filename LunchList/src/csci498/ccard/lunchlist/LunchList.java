@@ -31,7 +31,7 @@ public class LunchList extends Activity {
 	public static List<String> addresses = new ArrayList<String>();
 	
 	//Array adapter for restaurants
-	ArrayAdapter<Restaurant> adapter = null;
+	RestaurantAdapter adapter = null;
 	
 	//Array adapter for autocomplete adress
 	ArrayAdapter<String> autoAdapter = null;
@@ -55,8 +55,7 @@ public class LunchList extends Activity {
         
         //sets addapter with this activity passed in a simple list item
         //and the list of restaurants
-        adapter = new ArrayAdapter<Restaurant>(this,
-        			android.R.layout.simple_list_item_1, model);
+        adapter = new RestaurantAdapter();
         
         list.setAdapter(adapter);
         
@@ -130,4 +129,10 @@ public class LunchList extends Activity {
 		}
 	};
     
+	class RestaurantAdapter extends ArrayAdapter<Restaurant>{
+		RestaurantAdapter()
+		{
+			super(LunchList.this, android.R.layout.simple_list_item_1, model);
+		}
+	}
 }
