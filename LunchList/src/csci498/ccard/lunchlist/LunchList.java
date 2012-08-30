@@ -7,6 +7,7 @@ package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -193,14 +194,17 @@ public class LunchList extends Activity {
 			
 			if(r.getType().equals("sit_down"))
 			{
+				name.setTextColor(Color.RED);
 				icon.setImageResource(R.drawable.ball_red);
 			}
 			else if(r.getType().equals("take_out"))
 			{
+				name.setTextColor(Color.MAGENTA);
 				icon.setImageResource(R.drawable.ball_yellow);
 			}
 			else
 			{
+				name.setTextColor(Color.GREEN);
 				icon.setImageResource(R.drawable.ball_green);
 			}
 		}
