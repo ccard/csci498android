@@ -3,6 +3,7 @@
  * 8/28/12
  * This class conatins the main activity for this project
  */
+//Test change for second machine
 package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
