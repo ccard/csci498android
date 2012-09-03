@@ -81,14 +81,14 @@ public class LunchList extends TabActivity {
         ListView list = (ListView)findViewById(R.id.restaurants);
         list.setOnItemClickListener(onListClick);
         
-        //sets addapter with this activity passed in a simple list item
+        //sets adapter with this activity passed in a simple list item
         //and the list of restaurants
         adapter = new RestaurantAdapter();
         
         list.setAdapter(adapter);
         
         addresses.add("the Mall");
-        //creates new list addapter for autocomplete text view
+        //creates new list adapter for autocomplete text view
         autoAdapter = new ArrayAdapter<String>(this,
         							android.R.layout.simple_dropdown_item_1line, addresses);
         
