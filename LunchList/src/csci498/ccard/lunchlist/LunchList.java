@@ -8,6 +8,7 @@ package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.TabActivity;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -26,8 +27,9 @@ import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
 import java.util.*;
+import android.widget.TabHost;
 
-public class LunchList extends Activity {
+public class LunchList extends TabActivity {
 
 	//stores list of restaurants
 	List<Restaurant> model = new ArrayList<Restaurant>();
@@ -49,6 +51,15 @@ public class LunchList extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        TabHost.TabSpec spec=getTabHost().newTabSpec("tag1");
+        spec.setContent(R.id.restaurants);
+        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
+        getTabHost().addTab(spec);
+        spec=getTabHost().newTabSpec("tag2");
+        spec.setContent(R.id.details);
+        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
+        getTabHost().addTab(spec);
         
         //stores the save button from the main.xml file
         Button save = (Button)findViewById(R.id.save);
@@ -73,10 +84,6 @@ public class LunchList extends Activity {
         
         acText.setAdapter(autoAdapter);
         
-        //set text font of the type label
-        TextView type = (TextView)findViewById(R.id.types_title);
-        Typeface font = Typeface.create("Arial", Typeface.ITALIC);
-        type.setTypeface(font);
         
   /*      //creating new radio buttons
         RadioGroup g = new RadioGroup(this);
