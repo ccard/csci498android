@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -72,6 +73,7 @@ public class LunchList extends TabActivity {
         save.setOnClickListener(onSave);
         
         ListView list = (ListView)findViewById(R.id.restaurants);
+        list.setOnItemClickListener(onListClick);
         
         //sets addapter with this activity passed in a simple list item
         //and the list of restaurants
@@ -90,6 +92,21 @@ public class LunchList extends TabActivity {
         
     }
 
+    /**
+     * stores the item click listener for list view in the list tab
+     */
+    private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
+
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) {
+			
+		}
+    	
+	};
+    
+    /**
+     * this stores the onclicklistener for the save button
+     */
     private View.OnClickListener onSave = new View.OnClickListener() {
 		
 		public void onClick(View v) {
