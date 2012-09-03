@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -48,16 +49,17 @@ public class LunchList extends TabActivity {
 	 EditText name = null;
 	 AutoCompleteTextView address = null;
 	 RadioGroup types = null;
+	 DatePicker date = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        
         name = (EditText)findViewById(R.id.name);
 		address = (AutoCompleteTextView)findViewById(R.id.addr);
 		types = (RadioGroup)findViewById(R.id.types);
+		date = (DatePicker)findViewById(R.id.date);
         
         //this sets the tab 1 up to display the list of restaurants
         TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
@@ -162,6 +164,10 @@ public class LunchList extends TabActivity {
 			
 			//adds the restaurant the user just created to the adapter
 			adapter.add(r);
+			
+			r.setMonth(date.getMonth());
+			r.setDay(date.getDayOfMonth());
+			r.setYear(date.getYear());
 		}
 	};
     
@@ -259,18 +265,21 @@ public class LunchList extends TabActivity {
 		private TextView name = null;
 		private TextView address = null;
 		private ImageView icon = null;
+		private TextView date = null;
 		
 		RestaurantHolder(View row)
 		{
 			name = (TextView)row.findViewById(R.id.title);
 			address = (TextView)row.findViewById(R.id.address);
 			icon = (ImageView)row.findViewById(R.id.icon);
+			date = (TextView)row.findViewById(R.id.date);
 		}
 		
 		void populateForm(Restaurant r)
 		{
 			name.setText(r.getName());
 			address.setText(r.getAddress());
+			date.setText(r.getDateString());
 			
 			if(r.getType().equals("sit_down"))
 			{

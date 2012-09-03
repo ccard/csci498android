@@ -11,12 +11,44 @@ public class Restaurant {
 	private String name="";
 	private String address="";
 	private String type="";
+	private int month;
+	private int day;
+	private int year;
 	
 	//getters and setters
 	public String getType() {
 		return type;
 	}
 	
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+	
+	public String getDateString()
+	{
+		return "Last visted on: "+month+"/"+day+"/"+year;
+	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
