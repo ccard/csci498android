@@ -43,15 +43,21 @@ public class LunchList extends TabActivity {
 	
 	//Array adapter for autocomplete adress
 	ArrayAdapter<String> autoAdapter = null;
-	
-	//access to the auto complete text view so we
-	//can update it with reacently added addresses
-	 AutoCompleteTextView acText = null;
+	 
+	//these store the access to the fields the user uses input info
+	 EditText name = null;
+	 AutoCompleteTextView address = null;
+	 RadioGroup types = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        
+        name = (EditText)findViewById(R.id.name);
+		address = (AutoCompleteTextView)findViewById(R.id.addr);
+		types = (RadioGroup)findViewById(R.id.types);
         
         //this sets the tab 1 up to display the list of restaurants
         TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
@@ -81,14 +87,12 @@ public class LunchList extends TabActivity {
         
         list.setAdapter(adapter);
         
-        acText = (AutoCompleteTextView)findViewById(R.id.addr);
-        
         addresses.add("the Mall");
         //creates new list addapter for autocomplete text view
         autoAdapter = new ArrayAdapter<String>(this,
         							android.R.layout.simple_dropdown_item_1line, addresses);
         
-        acText.setAdapter(autoAdapter);
+        address.setAdapter(autoAdapter);
         
     }
 
@@ -97,9 +101,26 @@ public class LunchList extends TabActivity {
      */
     private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
 
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+				
+			Restaurant r = model.get(position);
 			
+			name.setText(r.getName());
+			address.setText(r.getAddress());
+			
+			if(r.getType().equals("sit_down"))
+			{
+				types.check(R.id.sit_down);
+			}
+			else if(r.getType().equals("take_out"))
+			{
+				types.check(R.id.take_out);
+			}
+			else
+			{
+				types.check(R.id.delivery);
+			}
 		}
     	
 	};
@@ -113,13 +134,9 @@ public class LunchList extends TabActivity {
 			
 			Restaurant r = new Restaurant();
 			
-			EditText name = (EditText)findViewById(R.id.name);
-			AutoCompleteTextView address = (AutoCompleteTextView)findViewById(R.id.addr);
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
 			
-			//creates functionality for radiogroup added via xml
-			RadioGroup types = (RadioGroup)findViewById(R.id.types);
 			//Determines the type of restaurant and adds the type to r
 			switch(types.getCheckedRadioButtonId())
 			{
@@ -139,7 +156,7 @@ public class LunchList extends TabActivity {
 			//adds new component to the adapter then sets acText's adapter to the
 			//newly modified adapter
 			autoAdapter.add(r.getAddress());
-			acText.setAdapter(autoAdapter);
+			address.setAdapter(autoAdapter);
 			
 			//adds the restaurant the user just created to the adapter
 			adapter.add(r);
