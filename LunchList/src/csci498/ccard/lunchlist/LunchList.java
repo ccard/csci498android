@@ -28,10 +28,12 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+
 import java.util.*;
 import android.widget.TabHost;
 
-public class LunchList extends TabActivity {
+public class LunchList extends Activity {
 
 	//stores list of restaurants
 	List<Restaurant> model = new ArrayList<Restaurant>();
@@ -50,7 +52,10 @@ public class LunchList extends TabActivity {
 	 AutoCompleteTextView address = null;
 	 RadioGroup types = null;
 	 DatePicker date = null;
-	
+	 ViewFlipper flip = null;
+	 Button prev = null;
+	 Button next = null;
+	 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,19 +65,25 @@ public class LunchList extends TabActivity {
 		address = (AutoCompleteTextView)findViewById(R.id.addr);
 		types = (RadioGroup)findViewById(R.id.types);
 		date = (DatePicker)findViewById(R.id.date);
-        
-        //this sets the tab 1 up to display the list of restaurants
-        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
-        spec.setContent(R.id.restaurants);
-        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
-        getTabHost().addTab(spec);
-        
-        //this sets tab 2 up to get the users information for the restaurants
-        spec = getTabHost().newTabSpec("tag2");
-        spec.setContent(R.id.details);
-        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
-        getTabHost().addTab(spec);
-        getTabHost().setCurrentTab(0);
+		flip = (ViewFlipper)findViewById(R.id.flip);
+		prev = (Button)findViewById(R.id.prev);
+		next = (Button)findViewById(R.id.next);
+		
+        next.setOnClickListener(onFlip);
+        prev.setOnClickListener(onFlip);
+		
+//        //this sets the tab 1 up to display the list of restaurants
+//        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+//        spec.setContent(R.id.restaurants);
+//        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
+//        getTabHost().addTab(spec);
+//        
+//        //this sets tab 2 up to get the users information for the restaurants
+//        spec = getTabHost().newTabSpec("tag2");
+//        spec.setContent(R.id.details);
+//        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
+//        getTabHost().addTab(spec);
+//        getTabHost().setCurrentTab(0);
         
         //stores the save button from the main.xml file
         Button save = (Button)findViewById(R.id.save);
@@ -97,6 +108,23 @@ public class LunchList extends TabActivity {
         address.setAdapter(autoAdapter);
         
     }
+    
+    /**
+     * this stores the onclicklistener for the prev button
+     */
+    private View.OnClickListener onFlip = new View.OnClickListener() {
+		
+		public void onClick(View v) {
+			if(v == next)
+			{
+				flip.showNext();
+			}
+			else
+			{
+				flip.showPrevious();
+			}
+		}
+    };
 
     /**
      * stores the item click listener for list view in the list tab
@@ -123,8 +151,8 @@ public class LunchList extends TabActivity {
 			{
 				types.check(R.id.delivery);
 			}
-			
-			getTabHost().setCurrentTab(1);
+			flip.showNext();
+			//getTabHost().setCurrentTab(1);
 		}
     	
 	};
