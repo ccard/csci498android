@@ -1,7 +1,7 @@
 /**
  * Chris Card
  * 8/28/12
- * This class conatins the main activity for this project
+ * This class contains the main activity for this project
  */
 //Test change for second machine
 package csci498.ccard.lunchlist;
@@ -52,14 +52,15 @@ public class LunchList extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        TabHost.TabSpec spec=getTabHost().newTabSpec("tag1");
+        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
         spec.setContent(R.id.restaurants);
         spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
         getTabHost().addTab(spec);
-        spec=getTabHost().newTabSpec("tag2");
+        spec = getTabHost().newTabSpec("tag2");
         spec.setContent(R.id.details);
         spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
         getTabHost().addTab(spec);
+        getTabHost().setCurrentTab(0);
         
         //stores the save button from the main.xml file
         Button save = (Button)findViewById(R.id.save);
