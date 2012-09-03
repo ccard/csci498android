@@ -52,10 +52,13 @@ public class LunchList extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        //this sets the tab 1 up to display the list of restaurants
         TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
         spec.setContent(R.id.restaurants);
         spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
         getTabHost().addTab(spec);
+        
+        //this sets tab 2 up to get the users information for the restaurants
         spec = getTabHost().newTabSpec("tag2");
         spec.setContent(R.id.details);
         spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
@@ -85,22 +88,6 @@ public class LunchList extends TabActivity {
         
         acText.setAdapter(autoAdapter);
         
-        
-  /*      //creating new radio buttons
-        RadioGroup g = new RadioGroup(this);
-        RadioButton take = new RadioButton(this);
-        RadioButton site = new RadioButton(this);
-        RadioButton deliv = new RadioButton(this);
-        //names new radio buttons
-        take.setText("Take-Out2");
-        site.setText("Sit-down2");
-        deliv.setText("Delivery 2");
-        //adds radiobuttons to group and to the table row
-        g.addView(take);
-        g.addView(site);
-        g.addView(deliv);
-        TableRow t = (TableRow)findViewById(R.id.tableRow1);
-        t.addView(g);*/
     }
 
     private View.OnClickListener onSave = new View.OnClickListener() {
