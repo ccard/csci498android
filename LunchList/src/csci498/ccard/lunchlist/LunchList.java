@@ -99,15 +99,6 @@ public class LunchList extends TabActivity {
         
     }
     
-    /**
-     * this stores the onclicklistener for the prev button
-     */
-    private View.OnClickListener onPrev = new View.OnClickListener() {
-		
-		public void onClick(View v) {
-			
-		}
-    };
 
     /**
      * stores the item click listener for list view in the list tab
