@@ -14,12 +14,22 @@ public class Restaurant {
 	private int month;
 	private int day;
 	private int year;
+	private String notes;
 	
 	//getters and setters
+	
 	public String getType() {
 		return type;
 	}
 	
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
 	public int getMonth() {
 		return month;
 	}
