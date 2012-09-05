@@ -43,7 +43,7 @@ public class LunchList extends TabActivity {
 	 EditText name = null;
 	 AutoCompleteTextView address = null;
 	 RadioGroup types = null;
-	 DatePicker date = null;
+	 EditText notes = null;
 	 
 	 
     @Override
@@ -54,8 +54,8 @@ public class LunchList extends TabActivity {
         name = (EditText)findViewById(R.id.name);
 		address = (AutoCompleteTextView)findViewById(R.id.addr);
 		types = (RadioGroup)findViewById(R.id.types);
-		date = (DatePicker)findViewById(R.id.date);
-        
+        notes = (EditText)findViewById(R.id.notes);
+		
         //this sets the tab 1 up to display the list of restaurants
         TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
         spec.setContent(R.id.restaurants);
@@ -106,6 +106,7 @@ public class LunchList extends TabActivity {
 			
 			name.setText(r.getName());
 			address.setText(r.getAddress());
+			notes.setText(r.getNotes());
 			
 			if(r.getType().equals("sit_down"))
 			{
@@ -136,6 +137,7 @@ public class LunchList extends TabActivity {
 			
 			r.setName(name.getText().toString());
 			r.setAddress(address.getText().toString());
+			r.setNotes(notes.getText().toString());
 			
 			//Determines the type of restaurant and adds the type to r
 			switch(types.getCheckedRadioButtonId())
@@ -152,6 +154,7 @@ public class LunchList extends TabActivity {
 			}
 			name.setText("");
 			address.setText("");
+			notes.setText("");
 		
 			//adds new component to the adapter then sets acText's adapter to the
 			//newly modified adapter
@@ -160,10 +163,6 @@ public class LunchList extends TabActivity {
 			
 			//adds the restaurant the user just created to the adapter
 			adapter.add(r);
-			
-			r.setMonth(date.getMonth());
-			r.setDay(date.getDayOfMonth());
-			r.setYear(date.getYear());
 		}
 	};
     
@@ -188,27 +187,6 @@ public class LunchList extends TabActivity {
 			{
 				LayoutInflater inflater = getLayoutInflater();
 				
-				/*
-				 * determines what kind of row layout should be used
-				 */
-		/*		switch (getItemViewType(position))
-				{
-					case 1:
-						row = inflater.inflate(R.layout.row, null);
-						holder = new RestaurantHolder(row);
-						row.setTag(holder);
-						break;
-					case 2:
-						row = inflater.inflate(R.layout.row_takeout, null);
-						holder = new RestaurantHolder(row);
-						row.setTag(holder);
-						break;
-					default:
-						row = inflater.inflate(R.layout.row_delivery, null);
-						holder = new RestaurantHolder(row);
-						row.setTag(holder);
-						break;
-				}*/
 				row = inflater.inflate(R.layout.row, null);
 				holder = new RestaurantHolder(row);
 				row.setTag(holder);
@@ -222,33 +200,7 @@ public class LunchList extends TabActivity {
 			
 			return row;
 		}
-		
-		/**
-		 * this overrides getviewitemtype to return a number based on the
-		 * type of restaurant
-		 * @param position of the item in the list
-		 * @return 1 for sit_down, 2 for take_out, 3 for delivery
-		 */
-	/*	public int getItemViewType(int position)
-		{
-			if(model.get(position).getType().equals("sit_down"))
-			{
-				return 1;
-			}
-			else if(model.get(position).getType().equals("take_out"))
-			{
-				return 2;
-			}
-			else
-			{
-				return 3;
-			}
-		}
-		
-		public int getViewTypeCount()
-		{
-			return 3;
-		}*/
+	
 	}
 	
 	/**
@@ -261,21 +213,18 @@ public class LunchList extends TabActivity {
 		private TextView name = null;
 		private TextView address = null;
 		private ImageView icon = null;
-		private TextView date = null;
 		
 		RestaurantHolder(View row)
 		{
 			name = (TextView)row.findViewById(R.id.title);
 			address = (TextView)row.findViewById(R.id.address);
 			icon = (ImageView)row.findViewById(R.id.icon);
-			date = (TextView)row.findViewById(R.id.date);
 		}
 		
 		void populateForm(Restaurant r)
 		{
 			name.setText(r.getName());
 			address.setText(r.getAddress());
-			date.setText(r.getDateString());
 			
 			if(r.getType().equals("sit_down"))
 			{
