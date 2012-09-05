@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.*;
 import android.widget.TabHost;
 
@@ -46,6 +49,7 @@ public class LunchList extends TabActivity {
 	 AutoCompleteTextView address = null;
 	 RadioGroup types = null;
 	 EditText notes = null;
+	 Restaurant current = null;
 	 
 	 
     @Override
@@ -95,13 +99,37 @@ public class LunchList extends TabActivity {
         
     }
     
+    /**
+     * This method displays the menu so that the user can see it
+     */
     @Override 
     public boolean onCreateOptionsMenu(Menu menu){
+    	//this inflates the menu so that it can be seen
     	new MenuInflater(this).inflate(R.menu.option, menu);
     	
     	return (super.onCreateOptionsMenu(menu));
     }
     
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	if(item.getItemId() == R.id.toast)
+    	{
+    		String message = "No restaurant selected";
+    		
+    		if(current != null)
+    		{
+    			message = current.getNotes();
+    		}
+    		
+    		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    		
+    		return true;
+    	}
+    	
+    	return (super.onOptionsItemSelected(item));
+    }
 
     /**
      * stores the item click listener for list view in the list tab
@@ -111,17 +139,17 @@ public class LunchList extends TabActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 				
-			Restaurant r = model.get(position);
+			current = model.get(position);
 			
-			name.setText(r.getName());
-			address.setText(r.getAddress());
-			notes.setText(r.getNotes());
+			name.setText(current.getName());
+			address.setText(current.getAddress());
+			notes.setText(current.getNotes());
 			
-			if(r.getType().equals("sit_down"))
+			if(current.getType().equals("sit_down"))
 			{
 				types.check(R.id.sit_down);
 			}
-			else if(r.getType().equals("take_out"))
+			else if(current.getType().equals("take_out"))
 			{
 				types.check(R.id.take_out);
 			}
@@ -142,23 +170,23 @@ public class LunchList extends TabActivity {
 		
 		public void onClick(View v) {
 			
-			Restaurant r = new Restaurant();
+			current = new Restaurant();
 			
-			r.setName(name.getText().toString());
-			r.setAddress(address.getText().toString());
-			r.setNotes(notes.getText().toString());
+			current.setName(name.getText().toString());
+			current.setAddress(address.getText().toString());
+			current.setNotes(notes.getText().toString());
 			
 			//Determines the type of restaurant and adds the type to r
 			switch(types.getCheckedRadioButtonId())
 			{
 				case R.id.sit_down:
-					r.setType("sit_down");
+					current.setType("sit_down");
 					break;
 				case R.id.take_out:
-					r.setType("take_out");
+					current.setType("take_out");
 					break;
 				case R.id.delivery:
-					r.setType("delivery");
+					current.setType("delivery");
 					break;
 			}
 			name.setText("");
@@ -167,11 +195,11 @@ public class LunchList extends TabActivity {
 		
 			//adds new component to the adapter then sets acText's adapter to the
 			//newly modified adapter
-			autoAdapter.add(r.getAddress());
+			autoAdapter.add(current.getAddress());
 			address.setAdapter(autoAdapter);
 			
 			//adds the restaurant the user just created to the adapter
-			adapter.add(r);
+			adapter.add(current);
 		}
 	};
     
