@@ -112,6 +112,20 @@ public class LunchList extends TabActivity {
     	//this inflates the menu so that it can be seen
     	new MenuInflater(this).inflate(R.menu.option, menu);
     	
+    	//ExtraCredit
+    	if(getTabHost().getCurrentTab() == 1)
+    	{
+    		MenuItem details = menu.getItem(1);
+    		details.setTitle("List");
+    		details.setIcon(getResources().getDrawable(R.drawable.list));
+    	}
+    	else if(getTabHost().getCurrentTab() == 0)
+    	{
+    		MenuItem details = menu.getItem(1);
+    		details.setTitle("Details");
+    		details.setIcon(getResources().getDrawable(R.drawable.restaurant));
+    	}
+    	
     	return (super.onCreateOptionsMenu(menu));
     }
     
@@ -145,6 +159,22 @@ public class LunchList extends TabActivity {
     		}
     		
     		return true;
+    	}
+    	//Extra Credit
+    	else if(item.getItemId() == R.id.switch_tabs)
+    	{
+    		if(item.getTitle().equals("Details"))
+    		{
+    			getTabHost().setCurrentTab(1);
+    			item.setTitle("List");
+    			item.setIcon(getResources().getDrawable(R.drawable.list));
+    		}
+    		else
+    		{
+    			getTabHost().setCurrentTab(0);
+    			item.setTitle("Details");
+    			item.setIcon(getResources().getDrawable(R.drawable.restaurant));
+    		}
     	}
     	
     	return (super.onOptionsItemSelected(item));
