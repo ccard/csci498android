@@ -7,6 +7,8 @@
 package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.TabActivity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -50,6 +52,9 @@ public class LunchList extends TabActivity {
 	 RadioGroup types = null;
 	 EditText notes = null;
 	 Restaurant current = null;
+	 
+	 //Extra Credit
+	 Builder dialog = null;
 	 
 	 
     @Override
@@ -123,7 +128,21 @@ public class LunchList extends TabActivity {
     			message = current.getNotes();
     		}
     		
-    		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    		//primary tutorial
+    		//Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    		
+    		//Extra credit
+    		if(dialog == null)
+    		{
+    			dialog = new AlertDialog.Builder(this);
+    			dialog.setMessage(message);
+    			dialog.show();
+    		}
+    		else
+    		{
+    			dialog.setMessage(message);
+    			dialog.show();
+    		}
     		
     		return true;
     	}
