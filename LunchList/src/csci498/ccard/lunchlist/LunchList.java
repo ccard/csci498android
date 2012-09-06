@@ -28,6 +28,8 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+//Extra Credit
+import android.util.Log;
 
 import java.util.*;
 import android.widget.TabHost;
@@ -55,6 +57,7 @@ public class LunchList extends TabActivity {
 	 
 	 //Extra Credit
 	 Builder dialog = null;
+	 Builder errordialog = null;
 	 
 	 
     @Override
@@ -66,6 +69,9 @@ public class LunchList extends TabActivity {
 		address = (AutoCompleteTextView)findViewById(R.id.addr);
 		types = (RadioGroup)findViewById(R.id.types);
         notes = (EditText)findViewById(R.id.notes);
+        
+        //Extra Credit
+        errordialog = new AlertDialog.Builder(this);
 		
         //this sets the tab 1 up to display the list of restaurants
         TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
@@ -205,6 +211,17 @@ public class LunchList extends TabActivity {
 			else
 			{
 				types.check(R.id.delivery);
+			}
+			//Extra Credit
+			try{
+				int i = 1/0;
+			}catch(ArithmeticException e)
+			{
+				errordialog.setTitle("ERROR!");
+				errordialog.setMessage("you tried to divid by 0 please try again");
+				errordialog.setNeutralButton("OK", null);
+				errordialog.show();
+				Log.i(e.toString(), "Can't divid by 0", e);
 			}
 			
 			getTabHost().setCurrentTab(1);
