@@ -7,6 +7,7 @@
 package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.TabActivity;
@@ -104,6 +105,19 @@ public class LunchList extends TabActivity {
         address.setAdapter(autoAdapter);
         
     }
+    
+    private void doSomeLongWork(final int incr) {
+    	SystemClock.sleep(250); 
+    	}
+    
+    private Runnable longTask=new Runnable() {
+    	public void run() {
+    		for (int i=0;i<20;i++) {
+    				doSomeLongWork(500);
+    		}
+    	}
+    };
+    
     
     /**
      * This method displays the menu so that the user can see it
