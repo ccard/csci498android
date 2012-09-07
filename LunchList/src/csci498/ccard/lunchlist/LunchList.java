@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.TabActivity;
 import android.graphics.Color;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +35,11 @@ import android.widget.Toast;
 
 
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import android.widget.TabHost;
 
 public class LunchList extends TabActivity {
@@ -62,6 +68,8 @@ public class LunchList extends TabActivity {
 	 
 	 //extra credit
 	 Handler handle;
+	 final LinkedBlockingQueue<Runnable> q = new LinkedBlockingQueue<Runnable>(5);
+	 ThreadPoolExecutor tasks;
 	 
 	 
     @Override
@@ -72,6 +80,39 @@ public class LunchList extends TabActivity {
  
         //extra credit
         handle = new Handler();
+        
+        
+        setProgressBarVisibility(true);
+		progress = 0;
+		
+        
+         Runnable longTask=new Runnable() {
+        	public void run() {
+        	
+        		for (int i=0;i<20;i++) {
+        				fakeJob(500);
+        		}
+        		handle.post(new Runnable() {
+        			public void run() {
+        			 setProgressBarVisibility(false);
+        			 
+        			 //extraCredit
+        			 if(getTabHost().getCurrentTab() == 0)
+        			 {
+        				 getTabHost().setCurrentTab(1);
+        			 }
+        			 else
+        			 {
+        				 getTabHost().setCurrentTab(0);
+        			 }
+        			}
+        		});
+        		killJob();
+        	}};
+        	q.add(longTask);
+        	tasks = new ThreadPoolExecutor(1, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+        	tasks.execute(longTask);
+        	
         
         //initialize the view items
         initViewItems();
@@ -102,6 +143,24 @@ public class LunchList extends TabActivity {
         
         address.setAdapter(autoAdapter);
         
+    }
+    
+    //Extra Credit
+    private void fakeJob(final int incr)
+    {
+    	handle.post(new Runnable() {
+    		public void run() {
+    		progress+=incr;
+    		setProgress(progress);
+    		}
+    	});
+    	SystemClock.sleep(250); 
+    }
+    
+    //extraCredit
+    private void killJob()
+    {
+    	tasks.shutdown();
     }
     
     /**
@@ -135,7 +194,7 @@ public class LunchList extends TabActivity {
         getTabHost().setCurrentTab(0);
     }
     
-    private void doSomeLongWork(final int incr) {
+   /* private void doSomeLongWork(final int incr) {
     	handle.post(new Runnable() {
     		public void run() {
     		progress+=incr;
@@ -168,7 +227,7 @@ public class LunchList extends TabActivity {
     	}
     	
     	
-    };
+    };*/
     
     
     /**
@@ -203,9 +262,9 @@ public class LunchList extends TabActivity {
     	}
     	else if(item.getItemId() == R.id.run )
     	{
-    		setProgressBarVisibility(true);
-    		progress = 0;
-    		new Thread(longTask).start();
+    		//setProgressBarVisibility(true);
+    		//progress = 0;
+    		//new Thread(longTask).start();
     	}
     	
     	return (super.onOptionsItemSelected(item));
