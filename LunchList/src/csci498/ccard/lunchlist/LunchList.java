@@ -146,6 +146,16 @@ public class LunchList extends TabActivity {
     		runOnUiThread(new Runnable() {
     			public void run() {
     			 setProgressBarVisibility(false);
+    			 
+    			 //extraCredit
+    			 if(getTabHost().getCurrentTab() == 0)
+    			 {
+    				 getTabHost().setCurrentTab(1);
+    			 }
+    			 else
+    			 {
+    				 getTabHost().setCurrentTab(0);
+    			 }
     			}
     		});
     	}
