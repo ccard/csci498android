@@ -7,6 +7,7 @@
 package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -59,12 +60,18 @@ public class LunchList extends TabActivity {
 	 //storage for the progress of the progress bar
 	 int progress;
 	 
+	 //extra credit
+	 Handler handle;
+	 
 	 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_main);
+ 
+        //extra credit
+        handle = new Handler();
         
         //initialize the view items
         initViewItems();
@@ -129,7 +136,7 @@ public class LunchList extends TabActivity {
     }
     
     private void doSomeLongWork(final int incr) {
-    	runOnUiThread(new Runnable() {
+    	handle.post(new Runnable() {
     		public void run() {
     		progress+=incr;
     		setProgress(progress);
@@ -143,7 +150,7 @@ public class LunchList extends TabActivity {
     		for (int i=0;i<20;i++) {
     				doSomeLongWork(500);
     		}
-    		runOnUiThread(new Runnable() {
+    		handle.post(new Runnable() {
     			public void run() {
     			 setProgressBarVisibility(false);
     			 
