@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -53,11 +54,13 @@ public class LunchList extends TabActivity {
 	 RadioGroup types = null;
 	 EditText notes = null;
 	 Restaurant current = null;
+	 int progress;
 	 
 	 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_main);
         
         name = (EditText)findViewById(R.id.name);
