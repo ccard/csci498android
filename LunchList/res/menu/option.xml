@@ -4,10 +4,15 @@
         android:id="@+id/toast"
         android:title="Raise Toast"
         android:icon="@drawable/toast"/>
+    <item
+        android:id="@+id/run"
+        android:title="Run Long Task"
+        android:icon="@drawable/run"/>
    <!-- Extra Credit -->
     <item 
         android:id="@+id/switch_tabs"
         android:title="Switch tabs"
         android:icon="@drawable/restaurant"/>
+    
 
 </menu>

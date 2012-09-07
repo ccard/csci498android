@@ -162,6 +162,10 @@ public class LunchList extends TabActivity {
     		
     		return true;
     	}
+    	else if(item.getItemId() == R.id.run )
+    	{
+    		new Thread(longTask).run();
+    	}
     	//Extra Credit
     	else if(item.getItemId() == R.id.switch_tabs)
     	{
