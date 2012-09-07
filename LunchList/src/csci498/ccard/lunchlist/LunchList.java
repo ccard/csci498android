@@ -49,12 +49,14 @@ public class LunchList extends TabActivity {
 	//Array adapter for autocomplete adress
 	ArrayAdapter<String> autoAdapter = null;
 	 
-	//these store the access to the fields the user uses input info
+	//these store the access to the fields the user uses to input info
 	 EditText name = null;
 	 AutoCompleteTextView address = null;
 	 RadioGroup types = null;
 	 EditText notes = null;
 	 Restaurant current = null;
+	 
+	 //storage for the progress of the progress bar
 	 int progress;
 	 
 	 
@@ -64,23 +66,11 @@ public class LunchList extends TabActivity {
         requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_main);
         
-        name = (EditText)findViewById(R.id.name);
-		address = (AutoCompleteTextView)findViewById(R.id.addr);
-		types = (RadioGroup)findViewById(R.id.types);
-        notes = (EditText)findViewById(R.id.notes);
-		
-        //this sets the tab 1 up to display the list of restaurants
-        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
-        spec.setContent(R.id.restaurants);
-        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
-        getTabHost().addTab(spec);
-        
-        //this sets tab 2 up to get the users information for the restaurants
-        spec = getTabHost().newTabSpec("tag2");
-        spec.setContent(R.id.details);
-        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
-        getTabHost().addTab(spec);
-        getTabHost().setCurrentTab(0);
+        //initialize the view items
+        initViewItems();
+	
+        //initializing the tabhosts
+        initTabHost();
         
         //stores the save button from the main.xml file
         Button save = (Button)findViewById(R.id.save);
@@ -97,6 +87,7 @@ public class LunchList extends TabActivity {
         
         list.setAdapter(adapter);
         
+        //addes initail item to addresses
         addresses.add("the Mall");
         //creates new list adapter for autocomplete text view
         autoAdapter = new ArrayAdapter<String>(this,
@@ -104,6 +95,37 @@ public class LunchList extends TabActivity {
         
         address.setAdapter(autoAdapter);
         
+    }
+    
+    /**
+     * this initializes the view items edit text, radiobuttons, and autocomplete
+     */
+    private void initViewItems()
+    {
+    	 //initializing the global views to the view from the xml files
+        name = (EditText)findViewById(R.id.name);
+		address = (AutoCompleteTextView)findViewById(R.id.addr);
+		types = (RadioGroup)findViewById(R.id.types);
+        notes = (EditText)findViewById(R.id.notes);
+    }
+
+    /**
+     * This method initializes the tabhost of the main view
+     */
+    private void initTabHost()
+    {
+    	 //this sets the tab 1 up to display the list of restaurants
+        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
+        spec.setContent(R.id.restaurants);
+        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
+        getTabHost().addTab(spec);
+        
+        //this sets tab 2 up to get the users information for the restaurants
+        spec = getTabHost().newTabSpec("tag2");
+        spec.setContent(R.id.details);
+        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
+        getTabHost().addTab(spec);
+        getTabHost().setCurrentTab(0);
     }
     
     private void doSomeLongWork(final int incr) {
@@ -140,7 +162,6 @@ public class LunchList extends TabActivity {
     	//this inflates the menu so that it can be seen
     	new MenuInflater(this).inflate(R.menu.option, menu);
     	
-    	
     	return (super.onCreateOptionsMenu(menu));
     }
     
@@ -148,6 +169,7 @@ public class LunchList extends TabActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
+    	//checks for the menu item being selected
     	if(item.getItemId() == R.id.toast)
     	{
     		String message = "No restaurant selected";
@@ -182,10 +204,12 @@ public class LunchList extends TabActivity {
 				
 			current = model.get(position);
 			
+			//sets the details tab fields to the current name address and notes
 			name.setText(current.getName());
 			address.setText(current.getAddress());
 			notes.setText(current.getNotes());
 			
+			//selects the apropriate radio button
 			if(current.getType().equals("sit_down"))
 			{
 				types.check(R.id.sit_down);
@@ -199,6 +223,7 @@ public class LunchList extends TabActivity {
 				types.check(R.id.delivery);
 			}
 			
+			//switches the tab to the details tab
 			getTabHost().setCurrentTab(1);
 		}
     	
@@ -212,7 +237,7 @@ public class LunchList extends TabActivity {
 		public void onClick(View v) {
 			
 			current = new Restaurant();
-			
+			//intializes the fields of the new current restaurant
 			current.setName(name.getText().toString());
 			current.setAddress(address.getText().toString());
 			current.setNotes(notes.getText().toString());
@@ -230,6 +255,7 @@ public class LunchList extends TabActivity {
 					current.setType("delivery");
 					break;
 			}
+			//clears the name fields
 			name.setText("");
 			address.setText("");
 			notes.setText("");
