@@ -39,28 +39,28 @@ import android.widget.TabHost;
 public class LunchList extends TabActivity {
 
 	//stores list of restaurants
-	List<Restaurant> model = new ArrayList<Restaurant>();
+	private List<Restaurant> model = new ArrayList<Restaurant>();
 	
 	//list of previous addresses 
 	public static List<String> addresses = new ArrayList<String>();
 	
 	//Array adapter for restaurants
-	RestaurantAdapter adapter = null;
+	private RestaurantAdapter adapter = null;
 	
 	//Array adapter for autocomplete adress
-	ArrayAdapter<String> autoAdapter = null;
+	private ArrayAdapter<String> autoAdapter = null;
 	 
 	//these store the access to the fields the user uses to input info
-	 EditText name = null;
-	 AutoCompleteTextView address = null;
-	 RadioGroup types = null;
-	 EditText notes = null;
-	 Restaurant current = null;
+	private EditText name = null;
+	private AutoCompleteTextView address = null;
+	private RadioGroup types = null;
+	private EditText notes = null;
+	private Restaurant current = null;
 	 
-	 AtomicBoolean isActive = new AtomicBoolean(true);
+	private AtomicBoolean isActive = new AtomicBoolean(true);
 	 
 	 //storage for the progress of the progress bar
-	 int progress;
+	private int progress;
 	 
 	 
     @Override
