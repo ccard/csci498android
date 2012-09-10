@@ -140,8 +140,8 @@ public class LunchList extends TabActivity {
     
     private Runnable longTask=new Runnable() {
     	public void run() {
-    		for (int i=0;i<20;i++) {
-    				doSomeLongWork(500);
+    		for (int i=0;i<10000;i+=200) {
+    				doSomeLongWork(200);
     		}
     		runOnUiThread(new Runnable() {
     			public void run() {
