@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 import java.util.*;
@@ -55,6 +56,8 @@ public class LunchList extends TabActivity {
 	 RadioGroup types = null;
 	 EditText notes = null;
 	 Restaurant current = null;
+	 
+	 AtomicBoolean isActive = new AtomicBoolean(true);
 	 
 	 //storage for the progress of the progress bar
 	 int progress;
@@ -140,7 +143,7 @@ public class LunchList extends TabActivity {
     
     private Runnable longTask=new Runnable() {
     	public void run() {
-    		for (int i=0;i<10000;i+=200) {
+    		for (int i=0;i<10000 && isActive.get();i+=200) {
     				doSomeLongWork(200);
     		}
     		runOnUiThread(new Runnable() {
@@ -148,11 +151,17 @@ public class LunchList extends TabActivity {
     			 setProgressBarVisibility(false);
     			}
     		});
-    	}
-    	
+    	}	
     	
     };
     
+    
+    @Override
+    public void onPause()
+    {
+    	super.onPause();
+    	isActive.set(false);
+    }
     
     /**
      * This method displays the menu so that the user can see it
