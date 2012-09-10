@@ -76,7 +76,7 @@ public class LunchList extends TabActivity {
         if(savedInstanceState != null)
         {
         	progress = savedInstanceState.getInt("progress");
-        		startWork();
+        	//	startWork();
         	thisInstance = savedInstanceState;
         }
         else
@@ -209,6 +209,20 @@ public class LunchList extends TabActivity {
     {
     	super.onStop();
     	onSaveInstanceState(thisInstance);
+    	isActive.set(false);
+    }
+    
+    @Override
+    public void onStart()
+    {
+    	super.onStart();
+    	
+    	isActive.set(true);
+ 	   
+ 	   if(progress > 0)
+ 	   {
+ 		   startWork();
+ 	   }
     }
     
     @Override
