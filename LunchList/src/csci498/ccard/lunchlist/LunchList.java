@@ -144,13 +144,24 @@ public class LunchList extends TabActivity {
 	   }
    }
    
+   /**
+    * This method starts the work thread by setting the visibility of 
+    * the progress bar to true and then starting the thread
+    */
    private void startWork()
    {
 	   setProgressBarVisibility(true);
 	   new Thread(longTask).start();
    }
     
+   /**
+    * this method updates the progress bar and increments
+    * the progress counter
+    * @param incr the amount to increment the progress counter
+    */
     private void doSomeLongWork(final int incr) {
+    	//this thread animates the progress bar so we see the bar
+    	//progress
     	runOnUiThread(new Runnable() {
     		public void run() {
     		progress+=incr;
@@ -160,11 +171,14 @@ public class LunchList extends TabActivity {
     	SystemClock.sleep(250); 
     }
     
+    //this is the runnable object that the work thread will perform
     private Runnable longTask=new Runnable() {
     	public void run() {
     		for (int i=progress;i<10000 && isActive.get();i+=200) {
     				doSomeLongWork(200);
     		}
+    		//when the thread is finished it hides the progress bar
+    		//and sets progress to 0
     		if(isActive.get())
     		{
     		runOnUiThread(new Runnable() {
