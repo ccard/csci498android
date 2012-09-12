@@ -42,7 +42,7 @@
 
                         <TextView
                             android:paddingRight="2dip"
-                            android:text="Name:" />
+                            android:text="@string/nametitle" />
 
                         <EditText
                             android:id="@+id/name"
@@ -51,7 +51,7 @@
                         <TextView
                             android:paddingLeft="2dip"
                             android:paddingRight="2dip"
-                            android:text="Address:" />
+                            android:text="@string/addresstitle" />
 
                         <AutoCompleteTextView
                             android:id="@+id/addr"
@@ -62,27 +62,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView android:text="Type:" />
+                        <TextView android:text="@string/typetitle" />
 
                         <RadioGroup android:id="@+id/types" >
 
                             <RadioButton
                                 android:id="@+id/take_out"
                                 android:checked="true"
-                                android:text="Take-Out" />
+                                android:text="@string/take_outtitle" />
 
                             <RadioButton
                                 android:id="@+id/sit_down"
-                                android:text="Sit-Down" />
+                                android:text="@string/sit_downtitle" />
 
                             <RadioButton
                                 android:id="@+id/delivery"
-                                android:text="Delivery" />
+                                android:text="@string/deliverytitle" />
                         </RadioGroup>
 
                         <TextView
                             android:paddingLeft="2dip"
-                            android:text="Notes:" />
+                            android:text="@string/notestitle" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                                 android:id="@+id/save"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Save" />
+                                android:text="@string/savetitle" />
                         </LinearLayout>
                     </TableRow>
                 </TableLayout>

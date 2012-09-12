@@ -41,42 +41,42 @@
 
                 <TableRow>
 
-                    <TextView android:text="Name:" />
+                    <TextView android:text="@string/nametitle" />
 
                     <EditText android:id="@+id/name" />
                 </TableRow>
 
                 <TableRow>
 
-                    <TextView android:text="Address:" />
+                    <TextView android:text="@string/addresstitle" />
 
                     <AutoCompleteTextView android:id="@+id/addr" />
                 </TableRow>
 
                 <TableRow>
 
-                    <TextView android:text="Type:" />
+                    <TextView android:text="@string/typetitle" />
 
                     <RadioGroup android:id="@+id/types" >
 
                         <RadioButton
                             android:id="@+id/take_out"
                             android:checked="true"
-                            android:text="Take-Out" />
+                            android:text="@string/take_outtitle" />
 
                         <RadioButton
                             android:id="@+id/sit_down"
-                            android:text="Sit-Down" />
+                            android:text="@string/sit_downtitle" />
 
                         <RadioButton
                             android:id="@+id/delivery"
-                            android:text="Delivery" />
+                            android:text="@string/deliverytitle" />
                     </RadioGroup>
                 </TableRow>
                 
                 <TableRow >
                     <TextView 
-                        android:text="Notes:"/>
+                        android:text="@string/notestitle"/>
                     
                     <EditText 
                         android:id="@+id/notes"
@@ -92,7 +92,7 @@
                     android:id="@+id/save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Save" />
+                    android:text="@string/savetitle" />
             </TableLayout>
             </ScrollView>
         </FrameLayout>

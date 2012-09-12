@@ -5,4 +5,15 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Lunch List</string>
 
+    <!-- this is extra credit number 2 chap 10 but good resources management so it wont be branched off like the other extra credits-->
+    <string name="nametitle">Name:</string>
+    <string name="addresstitle">Address:</string>
+    <string name="notestitle">Notes:</string>
+    <string name="savetitle">Save</string>
+    <string name="take_outtitle">Take-Out</string>
+    <string name="sit_downtitle">Sit-Down</string>
+    <string name="deliverytitle">Delivery</string>
+    <string name="typetitle">Types:</string>
+
+
 </resources>
