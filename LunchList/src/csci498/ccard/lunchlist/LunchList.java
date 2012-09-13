@@ -75,6 +75,15 @@ public class LunchList extends TabActivity {
         //initializing the tabhosts
         initTabHost();
         
+        //Extra Credit
+        if(savedInstanceState != null)
+        {
+        	name.setText(savedInstanceState.getString("Name"));
+        	address.setText(savedInstanceState.getString("Address"));
+        	notes.setText(savedInstanceState.getString("Notes"));
+        	types.check(savedInstanceState.getInt("Type"));
+        }
+
         //stores the save button from the main.xml file
         Button save = (Button)findViewById(R.id.save);
         
@@ -98,6 +107,18 @@ public class LunchList extends TabActivity {
         
         address.setAdapter(autoAdapter);
         
+    }
+
+    //Extra credit
+    @Override
+    public void onSaveInstanceState(Bundle instance)
+    {
+    	super.onSaveInstanceState(instance);
+
+    	instance.putString("Name", name.getText().toString());
+    	instance.putString("Address", address.getText().toString());
+    	instance.putString("Notes", notes.getText().toString());
+    	instance.putInt("Type", types.getCheckedRadioButtonId());
     }
     
     /**
