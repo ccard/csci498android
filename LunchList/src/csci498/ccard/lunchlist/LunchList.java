@@ -34,6 +34,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 
 import java.util.*;
+
+import csci498.ccard.lunchlist.apt.tutorial.RestaurantHelper;
 import android.widget.TabHost;
 
 public class LunchList extends TabActivity {
@@ -56,12 +58,16 @@ public class LunchList extends TabActivity {
 	private RadioGroup types = null;
 	private EditText notes = null;
 	private Restaurant current = null;
+	
+	private RestaurantHelper helper;
 	 
 	 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        helper = new RestaurantHelper(this);
         
         //initialize the view items
         initViewItems();
@@ -92,6 +98,13 @@ public class LunchList extends TabActivity {
         
         address.setAdapter(autoAdapter);
         
+    }
+
+    @Override
+    public void onDestroy()
+    {
+    	super.onDestroy();
+    	helper.close();
     }
     
     /**
