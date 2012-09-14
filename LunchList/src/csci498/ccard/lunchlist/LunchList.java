@@ -57,16 +57,10 @@ public class LunchList extends TabActivity {
 	private EditText notes = null;
 	private Restaurant current = null;
 	 
-	private AtomicBoolean isActive = new AtomicBoolean(true);
-	 
-	 //storage for the progress of the progress bar
-	private int progress;
-	 
 	 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_main);
         
         //initialize the view items
@@ -131,113 +125,6 @@ public class LunchList extends TabActivity {
         getTabHost().setCurrentTab(0);
     }
     
-    
-   @Override
-    public void onResume()
-   {
-	   super.onResume();
-	   isActive.set(true);
-	   
-	   if(progress > 0)
-	   {
-		   startWork();
-	   }
-   }
-   
-   /**
-    * This method starts the work thread by setting the visibility of 
-    * the progress bar to true and then starting the thread
-    */
-   private void startWork()
-   {
-	   setProgressBarVisibility(true);
-	   new Thread(longTask).start();
-   }
-    
-   /**
-    * this method updates the progress bar and increments
-    * the progress counter
-    * @param incr the amount to increment the progress counter
-    */
-    private void doSomeLongWork(final int incr) {
-    	//this thread animates the progress bar so we see the bar
-    	//progress
-    	runOnUiThread(new Runnable() {
-    		public void run() {
-    		progress+=incr;
-    		setProgress(progress);
-    		}
-    	});
-    	SystemClock.sleep(250); 
-    }
-    
-    //this is the runnable object that the work thread will perform
-    private Runnable longTask=new Runnable() {
-    	public void run() {
-    		for (int i=progress;i<10000 && isActive.get();i+=200) {
-    				doSomeLongWork(200);
-    		}
-    		//when the thread is finished it hides the progress bar
-    		//and sets progress to 0
-    		if(isActive.get())
-    		{
-    		runOnUiThread(new Runnable() {
-    			public void run() {
-    			 setProgressBarVisibility(false);
-    			 progress = 0;
-    			}
-    		});
-    		}
-    	}	
-    	
-    };
-    
-    
-    @Override
-    public void onPause()
-    {
-    	super.onPause();
-    	isActive.set(false);
-    }
-    
-    /**
-     * This method displays the menu so that the user can see it
-     */
-    @Override 
-    public boolean onCreateOptionsMenu(Menu menu){
-    	//this inflates the menu so that it can be seen
-    	new MenuInflater(this).inflate(R.menu.option, menu);
-    	
-    	return (super.onCreateOptionsMenu(menu));
-    }
-    
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-    	//checks for the menu item being selected
-    	if(item.getItemId() == R.id.toast)
-    	{
-    		String message = "No restaurant selected";
-    		
-    		if(current != null)
-    		{
-    			message = current.getNotes();
-    		}
-    		
-    		//primary tutorial
-    		Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    		
-    		return true;
-    	}
-    	else if(item.getItemId() == R.id.run )
-    	{
-    		startWork();
-    		return true;
-    	}
-    	
-    	return (super.onOptionsItemSelected(item));
-    }
 
     /**
      * stores the item click listener for list view in the list tab
