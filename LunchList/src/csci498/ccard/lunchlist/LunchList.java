@@ -181,37 +181,29 @@ public class LunchList extends TabActivity {
 		
 		public void onClick(View v) {
 			
-			current = new Restaurant();
-			//intializes the fields of the new current restaurant
-			current.setName(name.getText().toString());
-			current.setAddress(address.getText().toString());
-			current.setNotes(notes.getText().toString());
+			String type = null;
 			
 			//Determines the type of restaurant and adds the type to r
 			switch(types.getCheckedRadioButtonId())
 			{
 				case R.id.sit_down:
-					current.setType("sit_down");
+					type = "sit_down";
 					break;
 				case R.id.take_out:
-					current.setType("take_out");
+					type = "take_out";
 					break;
 				case R.id.delivery:
-					current.setType("delivery");
+					type = "delivery";
 					break;
 			}
-			//clears the name fields
-			name.setText("");
-			address.setText("");
-			notes.setText("");
 		
 			//adds new component to the adapter then sets acText's adapter to the
 			//newly modified adapter
-			autoAdapter.add(current.getAddress());
+			autoAdapter.add(address.getText().toString());
 			address.setAdapter(autoAdapter);
 			
-			//adds the restaurant the user just created to the adapter
-			adapter.add(current);
+			helper.insert(name.getText().toString(), address.getText().toString(),
+							type, notes.getText().toString());
 		}
 	};
     
