@@ -9,6 +9,7 @@ import csci498.ccard.lunchlist.LunchList;
 import csci498.ccard.lunchlist.R;
 import csci498.ccard.lunchlist.Restaurant;
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,10 @@ public class DetailForm extends Activity
         //adds and on click listener
         save.setOnClickListener(onSave);
         
+        if(restaurantId != null)
+        {
+        	load();
+        }
     }
     
     /**
@@ -59,6 +64,39 @@ public class DetailForm extends Activity
 		address = (EditText)findViewById(R.id.addr);
 		types = (RadioGroup)findViewById(R.id.types);
         notes = (EditText)findViewById(R.id.notes);
+    }
+
+
+    public void load()
+    {
+    	Cursor c = helper.getById(restaurantId);
+
+    	c.moveToFirst();
+    	name.setText(helper.getName(c));
+    	address.setText(helper.getAddress(c));
+    	notes.setText(helper.getNotes(c));
+
+    	if(helper.getType(c).equals("sit_down"))
+    	{
+    		types.check(R.id.sit_down);
+    	}
+    	else if(helper.getType(c).equals("take_out"))
+    	{
+    		types.check(R.id.take_out);
+    	}
+    	else
+    	{
+    		types.check(R.id.delivery);
+    	}
+
+    	c.close();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+    	super.onDestroy();
+    	helper.close();
     }
 
 
