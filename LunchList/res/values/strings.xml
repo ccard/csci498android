@@ -14,6 +14,7 @@
     <string name="sit_downtitle">Sit-Down</string>
     <string name="deliverytitle">Delivery</string>
     <string name="typetitle">Types:</string>
+    <string name="menuNotice">Click the MENU button to add a restaurant!</string>
 
 
 </resources>
