@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Context;
 import android.content.Intent;
@@ -89,21 +90,14 @@ public class LunchList extends ListActivity {
     	return (super.onOptionsItemSelected(item));
     }
 
-    /**
-     * stores the item click listener for list view in the list tab
-     */
-    private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
-
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
+    @Override
+   public void onListItemClick(ListView list, View view, int position, long id) {
 				
 			Intent i = new Intent(LunchList.this, DetailForm.class);
 
 			i.putExtra(ID_EXTRA, String.valueOf(id));
 			startActivity(i);
 		}
-    	
-	};
     
     
 	/**
