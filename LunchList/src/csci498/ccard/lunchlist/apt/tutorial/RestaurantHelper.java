@@ -27,7 +27,7 @@ public class RestaurantHelper extends SQLiteOpenHelper
 	@Override
 	public void onCreate(SQLiteDatabase db)
 	{
-		db.execSQL("CREATE TABLE restaurants (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, address TEXT, type TEXT, notes TEXT);");
+		db.execSQL("CREATE TABLE restaurants (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, address TEXT, type TEXT, notes TEXT, url TEXT);");
 	}
 
 	@Override
@@ -41,10 +41,10 @@ public class RestaurantHelper extends SQLiteOpenHelper
 	{
 		String[] args = {id};
 
-		return (getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes FROM restaurants WHERE _ID=?", args));
+		return (getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes, url FROM restaurants WHERE _ID=?", args));
 	}
 
-	public void update(String id, String name, String address, String type, String notes)
+	public void update(String id, String name, String address, String type, String notes, String url)
 	{
 		ContentValues cv = new ContentValues();
 		String[] args = {id};
@@ -53,11 +53,12 @@ public class RestaurantHelper extends SQLiteOpenHelper
 		cv.put("address", address);
 		cv.put("type", type);
 		cv.put("notes", notes);
+		cv.put("url", url);
 
 		getWritableDatabase().update("restaurants", cv, "_ID=?", args);
 	}
 
-	public void insert(String name, String address, String type, String notes)
+	public void insert(String name, String address, String type, String notes, String url)
 	{
 		ContentValues cv = new ContentValues();
 
@@ -65,13 +66,14 @@ public class RestaurantHelper extends SQLiteOpenHelper
 		cv.put("address", address);
 		cv.put("type", type);
 		cv.put("notes", notes);
+		cv.put("url", url);
 
 		getWritableDatabase().insert("restaurants", "name", cv);
 	}
 
 	public Cursor getAll()
 	{
-		return (getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes FROM restaurants ORDER BY name", null));
+		return (getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes, url FROM restaurants ORDER BY name", null));
 	}
 
 	public String getName(Cursor c)
@@ -92,5 +94,10 @@ public class RestaurantHelper extends SQLiteOpenHelper
 	public String getNotes(Cursor c)
 	{
 		return (c.getString(4));
+	}
+
+	public String getURL(Cursor c)
+	{
+		return (c.getString(5));
 	}
 }

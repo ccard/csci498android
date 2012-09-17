@@ -61,6 +61,14 @@
                 android:singleLine="false" />
         </TableRow>
 
+        <TableRow>
+            <TextView android:text="URL"/>
+
+            <EditText
+                android:id="@+id/URL"/>
+                
+        </TableRow>
+
         <Button
             android:id="@+id/save"
             android:layout_width="match_parent"

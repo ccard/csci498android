@@ -23,6 +23,7 @@ public class DetailForm extends Activity
 	private EditText address = null;
 	private RadioGroup types = null;
 	private EditText notes = null;
+	private EditText url = null;
 
 	private RestaurantHelper helper;
 
@@ -63,6 +64,7 @@ public class DetailForm extends Activity
 		address = (EditText)findViewById(R.id.addr);
 		types = (RadioGroup)findViewById(R.id.types);
         notes = (EditText)findViewById(R.id.notes);
+        url = (EditText)findViewById(R.id.URL);
     }
 
 
@@ -124,11 +126,11 @@ public class DetailForm extends Activity
 			
 			if(restaurantId == null)
 			{
-				helper.insert(name.getText().toString(), address.getText().toString(), type, notes.getText().toString());
+				helper.insert(name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), "http://"+url.getText().toString());
 			}
 			else
 			{
-				helper.update(restaurantId, name.getText().toString(), address.getText().toString(), type, notes.getText().toString());
+				helper.update(restaurantId, name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), url.getText().toString());
 			}
 
 			finish();

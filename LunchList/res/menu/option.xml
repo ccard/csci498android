@@ -4,4 +4,8 @@
         android:id="@+id/add"
         android:title="Add"
         android:icon="@drawable/ic_menu_add"/>
+    <item
+        android:id="@+id/openurl"
+        android:text="URL"
+        android:icon="@drawable/ic_menu_view"/>
 </menu>

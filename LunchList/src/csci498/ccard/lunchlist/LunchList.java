@@ -6,7 +6,10 @@
 //Test change for second machine
 package csci498.ccard.lunchlist;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -15,11 +18,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.widget.CursorAdapter;
@@ -69,6 +72,23 @@ public class LunchList extends ListActivity {
     	super.onDestroy();
     	helper.close();
     }
+
+    public CharSequence[] makeList()
+    {
+    	String buff = "";
+    	
+    	for(boolean flag = model.moveToFirst(); flag ; flag = model.moveToNext())
+    	{
+    		buff += helper.getName(model)+",";
+    	}
+
+    	String words[] = buff.split(",");
+
+    	CharSequence[] se = words;
+    	model.moveToFirst();
+
+    	return se;
+    }
     
 
     @Override
@@ -86,6 +106,31 @@ public class LunchList extends ListActivity {
     	{
     		startActivity(new Intent(LunchList.this, DetailForm.class));
     		return true;
+    	}
+    	else if(item.getItemId() == R.id.openurl)
+    	{
+    		Builder build = new Builder(this);
+    		build.setTitle("Select a Restaurant URL to open");
+    		build.setItems(makeList(), new DialogInterface.OnClickListener()
+    					{
+    						public void onClick(DialogInterface dialog, int item)
+    						{
+    								model.move(item);
+    								String url = helper.getURL(model);
+    								if(url.contains("http://"))
+    								{
+    									Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    									startActivity(browser);
+    								}
+    								else
+    								{
+    									Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"+url));
+    		        					startActivity(browser);
+    								}
+    						}
+    					});
+    		AlertDialog alert = build.create();
+    		alert.show();
     	}
     	return (super.onOptionsItemSelected(item));
     }
