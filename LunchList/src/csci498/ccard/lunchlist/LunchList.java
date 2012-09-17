@@ -28,6 +28,8 @@ import csci498.ccard.lunchlist.apt.tutorial.RestaurantHelper;
 
 public class LunchList extends ListActivity {
 
+	public final static String ID_EXTRA = "apt.tutorial._ID";
+
 	//stores list of restaurants
 	private Cursor model = null;
 	
@@ -75,6 +77,7 @@ public class LunchList extends ListActivity {
 				
 			Intent i = new Intent(LunchList.this, DetailForm.class);
 
+			i.putExtra(ID_EXTRA, String.valueOf(id));
 			startActivity(i);
 		}
     	

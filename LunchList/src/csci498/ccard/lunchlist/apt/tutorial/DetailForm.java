@@ -5,6 +5,7 @@
 */
 package csci498.ccard.lunchlist.apt.tutorial;
 
+import csci498.ccard.lunchlist.LunchList;
 import csci498.ccard.lunchlist.R;
 import csci498.ccard.lunchlist.Restaurant;
 import android.app.Activity;
@@ -25,6 +26,8 @@ public class DetailForm extends Activity
 
 	private RestaurantHelper helper;
 
+	private String restaurantId = null;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -35,6 +38,8 @@ public class DetailForm extends Activity
         
         //initialize the view items
         initViewItems();
+
+        restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
         
         //stores the save button from the main.xml file
         Button save = (Button)findViewById(R.id.save);
