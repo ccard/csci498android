@@ -23,7 +23,7 @@
 
             <TextView android:text="@string/addresstitle" />
 
-            <AutoCompleteTextView android:id="@+id/addr" />
+            <EditText android:id="@+id/addr" />
         </TableRow>
 
         <TableRow>
