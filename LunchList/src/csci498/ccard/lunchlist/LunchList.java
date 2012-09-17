@@ -7,30 +7,14 @@
 package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.TabActivity;
+import android.app.ListActivity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.util.concurrent.atomic.AtomicBoolean;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -41,9 +25,8 @@ import java.util.*;
 
 import csci498.ccard.lunchlist.apt.tutorial.DetailForm;
 import csci498.ccard.lunchlist.apt.tutorial.RestaurantHelper;
-import android.widget.TabHost;
 
-public class LunchList extends TabActivity {
+public class LunchList extends ListActivity {
 
 	//stores list of restaurants
 	private Cursor model = null;
@@ -53,16 +36,6 @@ public class LunchList extends TabActivity {
 	
 	//Array adapter for restaurants
 	private RestaurantAdapter adapter = null;
-	
-	//Array adapter for autocomplete adress
-	private ArrayAdapter<String> autoAdapter = null;
-	 
-	//these store the access to the fields the user uses to input info
-	private EditText name = null;
-	private AutoCompleteTextView address = null;
-	private RadioGroup types = null;
-	private EditText notes = null;
-	private Restaurant current = null;
 	
 	private RestaurantHelper helper;
 	 
@@ -74,21 +47,6 @@ public class LunchList extends TabActivity {
 
         helper = new RestaurantHelper(this);
         
-        //initialize the view items
-        initViewItems();
-	
-        //initializing the tabhosts
-        initTabHost();
-        
-        //stores the save button from the main.xml file
-        Button save = (Button)findViewById(R.id.save);
-        
-        //adds and on click listener
-        save.setOnClickListener(onSave);
-        
-        ListView list = (ListView)findViewById(R.id.restaurants);
-        list.setOnItemClickListener(onListClick);
-        
         model = helper.getAll();
         startManagingCursor(model);
 
@@ -96,16 +54,7 @@ public class LunchList extends TabActivity {
         //and the list of restaurants
         adapter = new RestaurantAdapter(model);
         
-        list.setAdapter(adapter);
-        
-        //addes initail item to addresses
-        addresses.add("the Mall");
-        //creates new list adapter for autocomplete text view
-        autoAdapter = new ArrayAdapter<String>(this,
-        							android.R.layout.simple_dropdown_item_1line, addresses);
-        
-        address.setAdapter(autoAdapter);
-        
+        setListAdapter(adapter);
     }
 
     @Override
@@ -113,37 +62,6 @@ public class LunchList extends TabActivity {
     {
     	super.onDestroy();
     	helper.close();
-    }
-    
-    /**
-     * this initializes the view items edit text, radiobuttons, and autocomplete
-     */
-    private void initViewItems()
-    {
-    	 //initializing the global views to the view from the xml files
-        name = (EditText)findViewById(R.id.name);
-		address = (AutoCompleteTextView)findViewById(R.id.addr);
-		types = (RadioGroup)findViewById(R.id.types);
-        notes = (EditText)findViewById(R.id.notes);
-    }
-
-    /**
-     * This method initializes the tabhost of the main view
-     */
-    private void initTabHost()
-    {
-    	 //this sets the tab 1 up to display the list of restaurants
-        TabHost.TabSpec spec = getTabHost().newTabSpec("tag1");
-        spec.setContent(R.id.restaurants);
-        spec.setIndicator("List", getResources().getDrawable(R.drawable.list));
-        getTabHost().addTab(spec);
-        
-        //this sets tab 2 up to get the users information for the restaurants
-        spec = getTabHost().newTabSpec("tag2");
-        spec.setContent(R.id.details);
-        spec.setIndicator("Details", getResources().getDrawable(R.drawable.restaurant));
-        getTabHost().addTab(spec);
-        getTabHost().setCurrentTab(0);
     }
     
 
@@ -162,39 +80,6 @@ public class LunchList extends TabActivity {
     	
 	};
     
-    /**
-     * this stores the onclicklistener for the save button
-     */
-    private View.OnClickListener onSave = new View.OnClickListener() {
-		
-		public void onClick(View v) {
-			
-			String type = null;
-			
-			//Determines the type of restaurant and adds the type to r
-			switch(types.getCheckedRadioButtonId())
-			{
-				case R.id.sit_down:
-					type = "sit_down";
-					break;
-				case R.id.take_out:
-					type = "take_out";
-					break;
-				case R.id.delivery:
-					type = "delivery";
-					break;
-			}
-		
-			//adds new component to the adapter then sets acText's adapter to the
-			//newly modified adapter
-			autoAdapter.add(address.getText().toString());
-			address.setAdapter(autoAdapter);
-			
-			helper.insert(name.getText().toString(), address.getText().toString(),
-							type, notes.getText().toString());
-			model.requery();
-		}
-	};
     
 	/**
 	 * This class holds the RestaurantAdapter for populating the listview with the restaurants
