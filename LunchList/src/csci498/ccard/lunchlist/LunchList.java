@@ -32,12 +32,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.concurrent.atomic.AtomicBoolean;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.widget.CursorAdapter;
 
 
 import java.util.*;
 
+import csci498.ccard.lunchlist.apt.tutorial.DetailForm;
 import csci498.ccard.lunchlist.apt.tutorial.RestaurantHelper;
 import android.widget.TabHost;
 
@@ -153,29 +155,9 @@ public class LunchList extends TabActivity {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 				
-			model.moveToPosition(position);
-			
-			//sets the details tab fields to the current name address and notes
-			name.setText(helper.getName(model));
-			address.setText(helper.getAddress(model));
-			notes.setText(helper.getNotes(model));
-			
-			//selects the apropriate radio button
-			if(helper.getType(model).equals("sit_down"))
-			{
-				types.check(R.id.sit_down);
-			}
-			else if(helper.getType(model).equals("take_out"))
-			{
-				types.check(R.id.take_out);
-			}
-			else
-			{
-				types.check(R.id.delivery);
-			}
-			
-			//switches the tab to the details tab
-			getTabHost().setCurrentTab(1);
+			Intent i = new Intent(LunchList.this, DetailForm.class);
+
+			startActivity(i);
 		}
     	
 	};
