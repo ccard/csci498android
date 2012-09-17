@@ -22,8 +22,7 @@ public class DetailForm extends Activity
 	private EditText address = null;
 	private RadioGroup types = null;
 	private EditText notes = null;
-	private Restaurant current = null;
-	
+
 	private RestaurantHelper helper;
 
 	@Override
