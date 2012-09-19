@@ -131,7 +131,7 @@ public class LunchList extends ListActivity {
    		{
    			if(key.equals("sort_order"))
    			{
-   				
+   				initList();
    			}
    		}
    	};
