@@ -28,6 +28,7 @@ import android.widget.CursorAdapter;
 import java.util.*;
 
 import csci498.ccard.lunchlist.apt.tutorial.DetailForm;
+import csci498.ccard.lunchlist.apt.tutorial.EditPreferences;
 import csci498.ccard.lunchlist.apt.tutorial.RestaurantHelper;
 
 public class LunchList extends ListActivity {
@@ -85,6 +86,11 @@ public class LunchList extends ListActivity {
     	if(item.getItemId() == R.id.add)
     	{
     		startActivity(new Intent(LunchList.this, DetailForm.class));
+    		return true;
+    	}
+    	else if(item.getItemId() == R.id.prefs)
+    	{
+    		startActivity(new Intent(this, EditPreferences.class));
     		return true;
     	}
     	return (super.onOptionsItemSelected(item));
