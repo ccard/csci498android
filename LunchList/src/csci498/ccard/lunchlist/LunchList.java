@@ -56,12 +56,25 @@ public class LunchList extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.registerOnSharedPreferenceChangeListener(prefListener);
-
         helper = new RestaurantHelper(this);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        initList();
+        prefs.registerOnSharedPreferenceChangeListener(prefListener);
         
-        model = helper.getAll(prefs.getString("sort_order", "name"));
+    }
+
+    /**
+    * this initializes the list from the cursor
+    */
+    private void initList()
+    {
+    	if(model != null)
+    	{
+    		stopManagingCursor(model);
+    		model.close();
+    	}
+    	model = helper.getAll(prefs.getString("sort_order", "name"));
         startManagingCursor(model);
 
         //sets adapter with this activity passed in a simple list item
