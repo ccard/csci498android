@@ -57,6 +57,7 @@ public class LunchList extends ListActivity {
         setContentView(R.layout.activity_main);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(prefListener);
 
         helper = new RestaurantHelper(this);
         
@@ -111,7 +112,17 @@ public class LunchList extends ListActivity {
 			startActivity(i);
 		}
     
-    
+   	private SharedPreferences.OnSharedPreferenceChangeListener prefListener= new SharedPreferences.OnSharedPreferenceChangeListener()
+   	{
+   		public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, String key)
+   		{
+   			if(key.equals("sort_order"))
+   			{
+   				
+   			}
+   		}
+   	};
+
 	/**
 	 * This class holds the RestaurantAdapter for populating the listview with the restaurants
 	 * @author Chris
