@@ -125,6 +125,9 @@ public class LunchList extends ListActivity {
 			startActivity(i);
 		}
     
+    /**
+     * This is a listener for a preference change from editpreferences
+     */
    	private SharedPreferences.OnSharedPreferenceChangeListener prefListener= new SharedPreferences.OnSharedPreferenceChangeListener()
    	{
    		public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, String key)
