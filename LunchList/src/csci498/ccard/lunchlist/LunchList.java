@@ -7,6 +7,7 @@
 package csci498.ccard.lunchlist;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.ListActivity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.widget.CursorAdapter;
 
@@ -45,6 +47,8 @@ public class LunchList extends ListActivity {
 	private RestaurantAdapter adapter = null;
 	
 	private RestaurantHelper helper;
+
+	private SharedPreferences prefs;
 	 
 	 
     @Override
@@ -52,9 +56,11 @@ public class LunchList extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         helper = new RestaurantHelper(this);
         
-        model = helper.getAll();
+        model = helper.getAll(prefs.getString("sort_order", "name"));
         startManagingCursor(model);
 
         //sets adapter with this activity passed in a simple list item
