@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".apt.tutorial.DetailForm"></activity>
+        <activity android:name=".apt.tutorial.EditPreferences"></activity>
         
     </application>
 
