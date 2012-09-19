@@ -8,8 +8,12 @@ package csci498.ccard.lunchlist.apt.tutorial;
 import csci498.ccard.lunchlist.LunchList;
 import csci498.ccard.lunchlist.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -98,6 +102,25 @@ public class DetailForm extends Activity
     	helper.close();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+    	new MenuInflater(this).inflate(R.menu.detail_option, menu);
+    	
+    	return (super.onCreateOptionsMenu(menu));
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	if(item.getItemId() == R.id.detailPrefs)
+    	{
+    		startActivity(new Intent(this, EditPreferences.class));
+    		return true;
+    	}
+    	
+    	return (super.onOptionsItemSelected(item));
+    }
 
 	/**
      * this stores the onclicklistener for the save button
