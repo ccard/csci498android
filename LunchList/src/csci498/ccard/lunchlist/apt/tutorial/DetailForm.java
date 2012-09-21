@@ -109,6 +109,17 @@ public class DetailForm extends Activity
         state.putInt("type", types.getCheckedRadioButtonId());
     }
 
+    @Override
+    public void onRestoreInstanceState(Bundle state)
+    {
+        super.onRestoreInstanceState(state);
+
+        name.setText(state.getString("name"));
+        address.setText(state.getString("address"));
+        notes.setText(state.getString("notes"));
+        types.check(state.getInt("type"));
+    }
+
 	/**
      * this stores the onclicklistener for the save button
      */
