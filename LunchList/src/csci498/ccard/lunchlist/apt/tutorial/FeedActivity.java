@@ -12,6 +12,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.mcsoxford.rss.RSSItem;
@@ -72,6 +74,15 @@ public class FeedActivity extends ListActivity {
 	{
 		state.feed = feed;
 		setListAdapter(new FeedAdapter(feed));
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id)
+	{
+		RSSItem item = (RSSItem)getListAdapter().getItem(position);
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setData(item.getLink());
+		startActivity(intent);
 	}
 
 	/**
