@@ -130,6 +130,17 @@ public class DetailForm extends Activity
         return (super.onOptionsItemSelected(item));
     }
 
+//extra credit
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        if(feed.getText().toString().equals(""))
+        {
+            return false;
+        }
+        return true;
+    }
+
     private boolean isNetworkAvailable()
     {
         ConnectivityManager cm = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
