@@ -14,11 +14,14 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.AsyncTask;
 import android.util.Log;
+import org.mcsoxford.rss.RSSReader;
+import org.mcsoxford.rss.RSSFeed;
 
 public class FeedActivity extends ListActivity {
 
-	private static class FeedTask extends AsyncTask<String, Void, Void>
+	private static class FeedTask extends AsyncTask<String, Void, RSSFeed>
 	{
+		private RSSReader reader = null;
 		private Exception e = null;
 		private FeedActivity activity = null;
 
@@ -27,33 +30,36 @@ public class FeedActivity extends ListActivity {
 			attach(activity);
 		}
 
-		private void attach(FeedActivity activity)
+		void attach(FeedActivity activity)
 		{
 			this.activity = activity;
 		}
-		@Override
-		public Void doInBackground(String... urls)
-		{
-			try{
-				DefaultHttpClient client = new DefaultHttpClient();
-				HttpGet getMethod = new HttpGet(urls[0]);
-				ResponseHandler<String> responseHandler = new BasicResponseHandler();
-				String responseBody = client.execute(getMethod, responseHandler);
 
-				Log.d("FeedActivity", responseBody);
+		void detach()
+		{
+			this.activity = null;
+		}
+
+		@Override
+		public RSSFeed doInBackground(String... urls)
+		{
+			RSSFeed result = null;
+
+			try{
+				result = reader.load(urls[0]);
 			}catch(Exception e){
 				this.e = e;
 			}
 
-			return (null);
+			return (result);
 		}
 
 		@Override
-		public void onPostExecute(Void unused)
+		public void onPostExecute(RSSFeed feed)
 		{
 			if(e == null)
 			{
-				//TODO
+				activity.setFeed(feed);
 			}
 			else
 			{
