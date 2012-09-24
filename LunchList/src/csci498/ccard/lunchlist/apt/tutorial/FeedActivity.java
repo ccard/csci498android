@@ -92,7 +92,7 @@ public class FeedActivity extends ListActivity {
 	 */
 	private static class FeedTask extends AsyncTask<String, Void, RSSFeed>
 	{
-		private RSSReader reader = null;
+		private RSSReader reader = new RSSReader();
 		private Exception e = null;
 		private FeedActivity activity = null;
 
