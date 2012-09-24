@@ -30,6 +30,7 @@
         </activity>
         <activity android:name=".apt.tutorial.DetailForm"></activity>
         <activity android:name=".apt.tutorial.EditPreferences"></activity>
+        <activity android:name=".apt.tutorial.FeedActivity"></activity>
         
     </application>
 
