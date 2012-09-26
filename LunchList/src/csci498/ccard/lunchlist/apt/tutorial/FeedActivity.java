@@ -12,8 +12,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,14 +46,20 @@ public class FeedActivity extends ListActivity
 		if(state == null)
 		{
 			state = new InstanceState();
-			state.task = new FeedTask(this);
-			state.task.execute(getIntent().getStringExtra(FEED_URL));
+			state.handler = new FeedHandler(this);
+
+			Intent i = new Intent(this, FeedService.class);
+
+			i.putExtra(FeedService.EXTRA_URL, getIntent().getStringExtra(FEED_URL));
+			i.putExtra(FeedService.EXTRA_MESSENGER, new Messenger(state.handler));
+			
+			startService(i);
 		}
 		else
 		{
-			if(state.task != null)
+			if(state.handler != null)
 			{
-				state.task.attach(this);
+				state.handler.attach(this);
 			}
 			if(state.feed != null)
 			{
@@ -61,9 +71,9 @@ public class FeedActivity extends ListActivity
 	@Override
 	public Object onRetainNonConfigurationInstance()
 	{
-		if(state.task != null)
+		if(state.handler != null)
 		{
-			state.task.detach();
+			state.handler.detach();
 		}
 		return state;
 	}
@@ -91,13 +101,11 @@ public class FeedActivity extends ListActivity
 	 * @author Chris card
 	 *
 	 */
-	private static class FeedTask extends AsyncTask<String, Void, RSSFeed>
+	private static class FeedHandler extends Handler
 	{
-		private RSSReader reader = new RSSReader();
-		private Exception e = null;
 		private FeedActivity activity = null;
 
-		FeedTask(FeedActivity activity)
+		FeedHandler(FeedActivity activity)
 		{
 			attach(activity);
 		}
@@ -113,31 +121,15 @@ public class FeedActivity extends ListActivity
 		}
 
 		@Override
-		public RSSFeed doInBackground(String... urls)
+		public void handleMessage(Message msg)
 		{
-			RSSFeed result = null;
-
-			try{
-				result = reader.load(urls[0]);
-			}catch(Exception e){
-				this.e = e;
-			}
-
-			return (result);
-		}
-
-		@Override
-		public void onPostExecute(RSSFeed feed)
-		{
-			//Checks to see if an error has occured in the retreval of the feed
-			if(e == null)
+			if (msg.arg1 == RESULT_OK)
 			{
-				activity.setFeed(feed);
+				activity.setFeed((RSSFeed)msg.obj);
 			}
 			else
 			{
-				Log.e("LunchList", "Exception parsing feed", e);
-				activity.goBlooey(e);
+				activity.goBlooey((Exception)msg.obj);
 			}
 		}
 	}
@@ -196,6 +188,6 @@ public class FeedActivity extends ListActivity
 	private static class InstanceState
 	{
 		RSSFeed feed = null;
-		FeedTask task = null;
+		FeedHandler handler = null;
 	}
 }
