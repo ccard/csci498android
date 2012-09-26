@@ -13,7 +13,9 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.SystemClock;
 import android.util.Log;
+import android.os.SystemClock;
 
 public class FeedService extends IntentService 
 {
@@ -49,6 +51,7 @@ public class FeedService extends IntentService
 
 		try
 		{
+			SystemClock.sleep(1000);
 			messsenger.send(msg);
 		}
 		catch(Exception e)
