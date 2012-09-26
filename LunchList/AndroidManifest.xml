@@ -31,7 +31,7 @@
         <activity android:name=".apt.tutorial.DetailForm"></activity>
         <activity android:name=".apt.tutorial.EditPreferences"></activity>
         <activity android:name=".apt.tutorial.FeedActivity"></activity>
-        
+        <service android:name=".FeedService"></service>
     </application>
 
 </manifest>
