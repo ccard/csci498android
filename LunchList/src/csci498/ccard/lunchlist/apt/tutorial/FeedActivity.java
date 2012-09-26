@@ -25,7 +25,8 @@ import org.mcsoxford.rss.RSSItem;
 import org.mcsoxford.rss.RSSReader;
 import org.mcsoxford.rss.RSSFeed;
 
-public class FeedActivity extends ListActivity {
+public class FeedActivity extends ListActivity 
+{
 
 	private InstanceState state = null;
 
@@ -64,7 +65,7 @@ public class FeedActivity extends ListActivity {
 		{
 			state.task.detach();
 		}
-		return (state);
+		return state;
 	}
 
 
@@ -158,17 +159,17 @@ public class FeedActivity extends ListActivity {
 
 		public int getCount() 
 		{
-			return(feed.getItems().size());
+			return feed.getItems().size();
 		}
 
 		public Object getItem(int position) 
 		{
-			return(feed.getItems().get(position));
+			return feed.getItems().get(position);
 		}
 
 		public long getItemId(int position) 
 		{
-			return(position);
+			return position;
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) 
@@ -182,7 +183,7 @@ public class FeedActivity extends ListActivity {
 			}
 			RSSItem item=(RSSItem)getItem(position);
 			((TextView)row).setText(item.getTitle());
-			return(row);
+			return row;
 		}
 	}
 

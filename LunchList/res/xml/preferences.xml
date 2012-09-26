@@ -1,3 +1,4 @@
+<!-- Chris Card | 9/20/2012 | layout for preferences for sorting restaurants -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <ListPreference

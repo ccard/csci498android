@@ -33,7 +33,8 @@ import csci498.ccard.lunchlist.apt.tutorial.DetailForm;
 import csci498.ccard.lunchlist.apt.tutorial.EditPreferences;
 import csci498.ccard.lunchlist.apt.tutorial.RestaurantHelper;
 
-public class LunchList extends ListActivity {
+public class LunchList extends ListActivity 
+{
 
 	public final static String ID_EXTRA = "apt.tutorial._ID";
 
@@ -52,7 +53,8 @@ public class LunchList extends ListActivity {
 	 
 	 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -60,8 +62,7 @@ public class LunchList extends ListActivity {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         initList();
-        prefs.registerOnSharedPreferenceChangeListener(prefListener);
-        
+        prefs.registerOnSharedPreferenceChangeListener(prefListener);    
     }
 
     /**
@@ -74,6 +75,7 @@ public class LunchList extends ListActivity {
     		stopManagingCursor(model);
     		model.close();
     	}
+
     	model = helper.getAll(prefs.getString("sort_order", "name"));
         startManagingCursor(model);
 
@@ -117,13 +119,14 @@ public class LunchList extends ListActivity {
     }
 
     @Override
-   public void onListItemClick(ListView list, View view, int position, long id) {
+   public void onListItemClick(ListView list, View view, int position, long id) 
+   {
 				
-			Intent i = new Intent(LunchList.this, DetailForm.class);
+		Intent i = new Intent(LunchList.this, DetailForm.class);
 
-			i.putExtra(ID_EXTRA, String.valueOf(id));
-			startActivity(i);
-		}
+		i.putExtra(ID_EXTRA, String.valueOf(id));
+		startActivity(i);
+	}
     
     /**
      * This is a listener for a preference change from editpreferences
@@ -144,7 +147,8 @@ public class LunchList extends ListActivity {
 	 * @author Chris
 	 *
 	 */
-	class RestaurantAdapter extends CursorAdapter{
+	class RestaurantAdapter extends CursorAdapter
+	{
 		
 		RestaurantAdapter(Cursor c)
 		{
@@ -170,9 +174,6 @@ public class LunchList extends ListActivity {
 
 			return row;
 		}
-
-		
-	
 	}
 	
 	/**
@@ -180,7 +181,8 @@ public class LunchList extends ListActivity {
 	 * @author Chris
 	 *
 	 */
-	static class RestaurantHolder{
+	static class RestaurantHolder
+	{
 		
 		private TextView name = null;
 		private TextView address = null;

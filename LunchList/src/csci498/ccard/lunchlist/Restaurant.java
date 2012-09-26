@@ -5,46 +5,53 @@
  */
 package csci498.ccard.lunchlist;
 
-public class Restaurant {
+public class Restaurant 
+{
 
-	//class global variables
-	private String name="";
-	private String address="";
-	private String type="";
-	private String notes;
+	private String name = "";
+	private String address = "";
+	private String type = "";
+	private String notes = "";
 	
-	//getters and setters
 	
-	public String getType() {
+	public String getType() 
+	{
 		return type;
 	}
 	
-	public String getNotes() {
+	public String getNotes() 
+	{
 		return notes;
 	}
 
-	public void setNotes(String notes) {
+	public void setNotes(String notes) 
+	{
 		this.notes = notes;
 	}
 
-	public void setType(String type) {
+	public void setType(String type) 
+	{
 		this.type = type;
 	}
 	
-	public String getName() {
-	return(name);
+	public String getName() 
+	{
+		return name;
 	}
 	
-	public void setName(String name) {
-	this.name=name;
+	public void setName(String name) 
+	{
+		this.name = name;
 	}
 	
-	public String getAddress() {
-	return(address);
+	public String getAddress() 
+	{
+		return address;
 	}
 	
-	public void setAddress(String address) {
-	this.address=address;
+	public void setAddress(String address) 
+	{
+		this.address = address;
 	}
 	
 	/**
@@ -52,6 +59,6 @@ public class Restaurant {
 	 */
 	public String toString()
 	{
-		return(getName());
+		return getName();
 	}
 }

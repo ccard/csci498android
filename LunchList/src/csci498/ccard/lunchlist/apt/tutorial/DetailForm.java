@@ -127,7 +127,7 @@ public class DetailForm extends Activity
             }
             return true;
         }
-        return (super.onOptionsItemSelected(item));
+        return super.onOptionsItemSelected(item);
     }
 
     private boolean isNetworkAvailable()
@@ -170,9 +170,11 @@ public class DetailForm extends Activity
 	/**
      * this stores the onclicklistener for the save button
      */
-    private View.OnClickListener onSave = new View.OnClickListener() {
+    private View.OnClickListener onSave = new View.OnClickListener() 
+    {
 		
-		public void onClick(View v) {
+		public void onClick(View v) 
+        {
 			
 			String type = null;
 			
@@ -200,7 +202,6 @@ public class DetailForm extends Activity
 			}
 
 			finish();
-			
 		}
 	};
 

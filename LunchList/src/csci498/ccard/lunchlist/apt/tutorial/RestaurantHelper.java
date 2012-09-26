@@ -1,7 +1,8 @@
 /*
  * Chris Card
  * 9/14/12
- * 
+ * This is a data base adapter to query and set sql data tables for restaurnts to persit states of
+ * restaurants
  */
 package csci498.ccard.lunchlist.apt.tutorial;
 
@@ -40,7 +41,7 @@ public class RestaurantHelper extends SQLiteOpenHelper
 	{
 		String[] args = {id};
 
-		return (getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes, feed FROM restaurants WHERE _ID=?", args));
+		return getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes, feed FROM restaurants WHERE _ID=?", args);
 	}
 
 	public void update(String id, String name, String address, String type, String notes, String feed)
@@ -72,31 +73,31 @@ public class RestaurantHelper extends SQLiteOpenHelper
 
 	public Cursor getAll(String orderBy)
 	{
-		return (getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes, feed FROM restaurants ORDER BY "+orderBy, null));
+		return getReadableDatabase().rawQuery("SELECT _id, name, address, type, notes, feed FROM restaurants ORDER BY "+orderBy, null);
 	}
 
 	public String getName(Cursor c)
 	{
-		return (c.getString(1));
+		return c.getString(1);
 	}
 
 	public String getAddress(Cursor c)
 	{
-		return (c.getString(2));
+		return c.getString(2);
 	}
 
 	public String getType(Cursor c)
 	{
-		return (c.getString(3));
+		return c.getString(3);
 	}
 
 	public String getNotes(Cursor c)
 	{
-		return (c.getString(4));
+		return c.getString(4);
 	}
 
 	public String getFeed(Cursor c)
 	{
-		return (c.getString(5));
+		return c.getString(5);
 	}
 }
