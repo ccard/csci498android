@@ -157,6 +157,13 @@ public class DetailForm extends Activity
     }
 
     @Override
+    public void onPause()
+    {
+        save();
+        super.onPause();
+    }
+
+    @Override
     public void onRestoreInstanceState(Bundle state)
     {
         super.onRestoreInstanceState(state);
@@ -168,41 +175,36 @@ public class DetailForm extends Activity
     }
 
 	/**
-     * this stores the onclicklistener for the save button
+     * save method to save the restaurants
      */
-    private View.OnClickListener onSave = new View.OnClickListener() 
-    {
-		
-		public void onClick(View v) 
+    private void save()
+	{
+        if (name.getText().toString().length() > 0)
         {
-			
-			String type = null;
-			
-			//Determines the type of restaurant and adds the type to r
-			switch(types.getCheckedRadioButtonId())
-			{
-				case R.id.sit_down:
-					type = "sit_down";
-					break;
-				case R.id.take_out:
-					type = "take_out";
-					break;
-				case R.id.delivery:
-					type = "delivery";
-					break;
-			}
-			
-			if(restaurantId == null)
-			{
-				helper.insert(name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), feed.getText().toString());
-			}
-			else
-			{
-				helper.update(restaurantId, name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), feed.getText().toString());
-			}
-
-			finish();
-		}
-	};
-
+    	   String type = null;
+    		
+    		//Determines the type of restaurant and adds the type to r
+    		switch(types.getCheckedRadioButtonId())
+    		{
+    			case R.id.sit_down:
+    				type = "sit_down";
+    				break;
+    			case R.id.take_out:
+    				type = "take_out";
+    				break;
+    			case R.id.delivery:
+    				type = "delivery";
+    				break;
+    		}
+    		
+    		if(restaurantId == null)
+    		{
+    			helper.insert(name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), feed.getText().toString());
+    		}
+    		else
+    		{
+    			helper.update(restaurantId, name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), feed.getText().toString());
+    		}
+        }
+	}
 }
