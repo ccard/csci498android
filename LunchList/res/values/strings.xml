@@ -16,6 +16,7 @@
     <string name="typetitle">Types:</string>
     <string name="menuNotice">Click the MENU button to add a restaurant!</string>
     <string name="feedtitle">Feed URL</string>
-
+    <string name="location">Location:</string>
+    <string name="not_set">(not set)</string>
 
 </resources>

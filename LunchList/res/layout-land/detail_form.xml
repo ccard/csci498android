@@ -67,11 +67,21 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/feedtitle" />
 
-                <Button
-                    android:id="@+id/save"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/savetitle" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:text="@string/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/location"
+                        android:text="@string/not_set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
             </LinearLayout>
         </TableRow>
     </TableLayout>

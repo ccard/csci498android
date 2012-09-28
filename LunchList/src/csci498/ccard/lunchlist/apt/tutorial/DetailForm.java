@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class DetailForm extends Activity 
@@ -31,6 +32,7 @@ public class DetailForm extends Activity
 	private RadioGroup types = null;
 	private EditText notes = null;
     private EditText feed = null;
+    private TextView location = null;
 
 	private RestaurantHelper helper;
 
@@ -49,12 +51,6 @@ public class DetailForm extends Activity
 
         restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
         
-        //stores the save button from the main.xml file
-        Button save = (Button)findViewById(R.id.save);
-        
-        //adds and on click listener
-        save.setOnClickListener(onSave);
-        
         if(restaurantId != null)
         {
         	load();
@@ -72,6 +68,7 @@ public class DetailForm extends Activity
 		types = (RadioGroup)findViewById(R.id.types);
         notes = (EditText)findViewById(R.id.notes);
         feed = (EditText)findViewById(R.id.feed);
+        location = (TextView)findViewById(R.id.location);
     }
 
 
@@ -97,6 +94,8 @@ public class DetailForm extends Activity
     	{
     		types.check(R.id.delivery);
     	}
+
+        location.setText(String.valueOf(helper.getLatitude(c))+", "+String.valueOf(helper.getLongitude(c)));
 
     	c.close();
     }
