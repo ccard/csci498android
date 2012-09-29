@@ -141,6 +141,17 @@ public class DetailForm extends Activity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        if (restaurantId == null)
+        {
+            menu.findItem(R.id.location).setEnabled(false);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     LocationListener onLocationChange = new LocationListener()
     {
         public void onLocationChanged(Location fix)
