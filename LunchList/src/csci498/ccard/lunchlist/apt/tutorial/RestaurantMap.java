@@ -4,11 +4,14 @@
 */
 package csci498.ccard.lunchlist.apt.tutorial;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
+import com.google.android.maps.OverlayItem;
 
 import csci498.ccard.lunchlist.R;
 
@@ -38,6 +41,11 @@ public class RestaurantMap extends MapActivity
 
 		GeoPoint status = new GeoPoint((int)(lat*1000000.0), (int)(lon*1000000.0));
 
+		Drawable marker = getResources().getDrawable(R.drawable.droppin);
+
+		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
+		 map.getOverlays().add(new RestaurantOverlay(marker, status, getIntent().getStringExtra(EXTRA_NAME)));
+
 		map.getController().setCenter(status);
 		map.setBuiltInZoomControls(true);
 	}
@@ -58,6 +66,21 @@ public class RestaurantMap extends MapActivity
 			super(marker);
 
 			boundCenterBottom(marker);
+			 item = new OverlayItem(point, name, name);
+
+			 populate();
+		}
+
+		@Override
+		public OverlayItem createItem(int i)
+		{
+			return item;
+		}
+
+		@Override
+		public int size()
+		{
+			return 1;
 		}
 	}
 }
