@@ -43,6 +43,9 @@ public class DetailForm extends Activity
 
     LocationManager locMgr = null;
 
+    private double latitude = 0.0d;
+    private double longitude = 0.0d;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -101,6 +104,8 @@ public class DetailForm extends Activity
     		types.check(R.id.delivery);
     	}
 
+        latitude = helper.getLatitude(c);
+        longitude = helper.getLongitude(c);
         location.setText(String.valueOf(helper.getLatitude(c))+", "+String.valueOf(helper.getLongitude(c)));
 
     	c.close();
@@ -141,6 +146,10 @@ public class DetailForm extends Activity
         else if (item.getItemId() == R.id.map) 
         {
             Intent i = new Intent(this, RestaurantMap.class);
+
+            i.putExtra(RestaurantMap.EXTRA_LATITUDE, latitude);
+            i.putExtra(RestaurantMap.EXTRA_LONGITUDE, longitude);
+            i.putExtra(RestaurantMap.EXTRA_NAME, name.getText().toString());
             startActivity(i);
 
             return true;
