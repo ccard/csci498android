@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import com.google.android.maps.MapActivity;
 
-import android.R;
+import csci498.ccard.lunchlist.R;
 
 public class RestaurantMap extends MapActivity
 {
@@ -16,7 +16,7 @@ public class RestaurantMap extends MapActivity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContent(R.layout.map);
+		setContentView(R.layout.map);
 	}
 
 	@Override
