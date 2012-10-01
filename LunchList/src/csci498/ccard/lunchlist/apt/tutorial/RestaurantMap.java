@@ -6,6 +6,7 @@ package csci498.ccard.lunchlist.apt.tutorial;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
@@ -69,6 +70,13 @@ public class RestaurantMap extends MapActivity
 			 item = new OverlayItem(point, name, name);
 
 			 populate();
+		}
+
+		@Override
+		public boolean onTap(int i)
+		{
+			Toast.makeText(RestaurantMap.this, item.getSnippet(), Toast.LENGTH_SHORT).show();
+			return true;
 		}
 
 		@Override
