@@ -35,6 +35,7 @@
         <activity android:name=".apt.tutorial.EditPreferences"></activity>
         <activity android:name=".apt.tutorial.FeedActivity"></activity>
         <activity android:name=".apt.tutorial.RestaurantMap"></activity>
+        <activity android:name=".apt.tutorial.AlarmActivity"></activity>
         <service android:name=".apt.tutorial.FeedService"></service>
         <receiver android:name=".apt.tutorial.OnBootReceiver"
             android:enabled="false">
@@ -42,6 +43,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
+        <receiver android:name=".apt.tutorial.OnAlarmReceiver"></receiver>
     </application>
 
 </manifest>
