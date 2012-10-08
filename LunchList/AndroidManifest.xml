@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:icon="@drawable/file_icon"
@@ -35,6 +36,12 @@
         <activity android:name=".apt.tutorial.FeedActivity"></activity>
         <activity android:name=".apt.tutorial.RestaurantMap"></activity>
         <service android:name=".apt.tutorial.FeedService"></service>
+        <receiver android:name=".apt.tutorial.OnBootReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
