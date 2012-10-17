@@ -4,6 +4,7 @@
 */
 package csci498.ccard.lunchlist.apt.tutorial;
 
+import csci498.ccard.lunchlist.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
