@@ -37,6 +37,7 @@
         <activity android:name=".apt.tutorial.RestaurantMap"></activity>
         <activity android:name=".apt.tutorial.AlarmActivity"></activity>
         <service android:name=".apt.tutorial.FeedService"></service>
+        <service android:name=".apt.tutorial.WidgetService"></service>
         <receiver android:name=".apt.tutorial.OnBootReceiver"
             android:enabled="false">
             <intent-filter>

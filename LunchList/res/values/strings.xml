@@ -18,5 +18,6 @@
     <string name="feedtitle">Feed URL</string>
     <string name="location">Location:</string>
     <string name="not_set">(not set)</string>
+    <string name="empty"> No restaurants!</string>
 
 </resources>
