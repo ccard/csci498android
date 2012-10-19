@@ -31,9 +31,9 @@ public class WidgetService extends IntentService {
 		{
 			Cursor c = helper.getReadableDatabase().rawQuery("SELECT COUNT(*) FROM restaurants", null);
 			c.moveToFirst();
-			int count=c.getInt(0);
+			int count = c.getInt(0);
 			c.close();
-			if (count>0) 
+			if (count > 0) 
 			{
 				int offset = (int)(count*Math.random());
 				String args[] = {String.valueOf(offset)};
