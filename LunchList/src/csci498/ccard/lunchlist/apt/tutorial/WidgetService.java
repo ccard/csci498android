@@ -48,8 +48,7 @@ public class WidgetService extends IntentService {
 			}
 			else 
 			{
-				updateViews.setTextViewText(R.id.title,
-				this.getString(R.string.empty));
+				updateViews.setTextViewText(R.id.title, this.getString(R.string.empty));
 			}
 		}
 		finally 
