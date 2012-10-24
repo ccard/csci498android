@@ -38,6 +38,8 @@
         <activity android:name=".apt.tutorial.AlarmActivity"></activity>
         <service android:name=".apt.tutorial.FeedService"></service>
         <service android:name=".apt.tutorial.WidgetService"></service>
+        <service android:name=".apt.tutorial.ListWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"></service>
         <receiver android:name=".apt.tutorial.OnBootReceiver"
             android:enabled="false">
             <intent-filter>
