@@ -5,6 +5,7 @@
 package csci498.ccard.lunchlist.apt.tutorial;
 
 import csci498.ccard.lunchlist.R;
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -29,6 +30,7 @@ public class AppWidget extends AppWidgetProvider {
 		}
 	}
 
+	@TargetApi(11)
 	public void onHCUpdate(Context ctxt, AppWidgetManager appWidgetManager, int[] appWidgetIds)
 	{
 		for (int i = 0; i < appWidgetIds.length; i++) 
