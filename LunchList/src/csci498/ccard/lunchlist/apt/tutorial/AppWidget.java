@@ -4,6 +4,7 @@
 */
 package csci498.ccard.lunchlist.apt.tutorial;
 
+import csci498.ccard.lunchlist.R;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -11,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.widget.RemoteViews;
 
 public class AppWidget extends AppWidgetProvider {
 
@@ -35,6 +37,9 @@ public class AppWidget extends AppWidgetProvider {
 
 			svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
 			svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+			
+			RemoteViews widget = new RemoteViews(ctxt.getPackageName(), R.layout.widget);
+			
 			Intent clickIntent = new Intent(ctxt, DetailForm.class);
 			PendingIntent clickPI = PendingIntent.getActivity(ctxt, 0, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
