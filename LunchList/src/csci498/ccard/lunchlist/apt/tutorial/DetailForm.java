@@ -12,6 +12,6 @@ public class DetailForm extends FragmentActivity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.detail_form);
+		setContentView(R.layout.detail_activity);
 	}
 }
