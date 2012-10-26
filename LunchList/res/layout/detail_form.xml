@@ -1,68 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Chris Card | 9/17/12 | layout for detailform class -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/details"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:shrinkColumns="1"
-        android:stretchColumns="1" >
-
-        <TableRow>
-
-            <TextView android:text="@string/nametitle" />
-
-            <EditText android:id="@+id/name" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView android:text="@string/addresstitle" />
-
-            <EditText android:id="@+id/addr" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView android:text="@string/typetitle" />
-
-            <RadioGroup android:id="@+id/types" >
-
-                <RadioButton
-                    android:id="@+id/take_out"
-                    android:checked="true"
-                    android:text="@string/take_outtitle" />
-
-                <RadioButton
-                    android:id="@+id/sit_down"
-                    android:text="@string/sit_downtitle" />
-
-                <RadioButton
-                    android:id="@+id/delivery"
-                    android:text="@string/deliverytitle" />
-            </RadioGroup>
-        </TableRow>
-
-        <TableRow>
-            <TextView android:text="@string/location"/>
-            <TextView android:id="@+id/location"
-                android:text="@string/not_set"/>
-        </TableRow>
-
-        <EditText
-            android:id="@+id/notes"
-            android:gravity="top"
-            android:hint="Notes"
-            android:inputType="textMultiLine"
-            android:lines="2"
-            android:maxLines="2"
-            android:scrollHorizontally="false" />
-
-        <EditText
-            android:id="@+id/feed"
-            android:hint="@string/feedtitle" />
-    </TableLayout>
-
-</ScrollView>
+    android:layout_height="match_parent"
+    class="apt.tutorial.DetailFragment" />
