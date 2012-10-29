@@ -49,6 +49,8 @@ public class DetailFragment extends Fragment
     private double latitude = 0.0d;
     private double longitude = 0.0d;
 
+    private static final String ARG_REST_ID = "apt.tutorial.ARG_REST_ID";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -63,11 +65,26 @@ public class DetailFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
 
         locMgr = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-       
         
         //initialize the view items
         initViewItems();
+
+        Bundle args = getArguments();
+
+        if (args != null) 
+        {
+            loadRestaurant(args.getString(ARG_REST_ID));    
+        }
+    }
+
+    public void loadRestaurant(String restaurantId)
+    {
+        this.restaurantId = restaurantId;
+
+        if (restaurantId != null) 
+        {
+            load();
+        }
     }
 
     @Override
