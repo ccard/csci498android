@@ -87,18 +87,25 @@ public class DetailFragment extends Fragment
         }
     }
 
-    @Override
-    public void onResume()
+    public static DetailFragment newInstance(long id)
     {
-        super.onResume();
+        DetailFragment result = new DetailFragment();
+        Bundle args = new Bundle();
 
-        helper = new RestaurantHelper(getActivity());
-        restaurantId = getActivity().getIntent().getStringExtra(LunchList.ID_EXTRA);
-        
-        if(restaurantId != null)
+        args.putString(ARG_REST_ID, String.valueOf(id));
+        result.setArguments(args);
+
+        return result;
+    }
+
+    public RestaurantHelper getHelper()
+    {
+        if (helper == null) 
         {
-            load();
+            helper = new RestaurantHelper(getActivity());    
         }
+
+        return helper;
     }
 
     @Override
@@ -124,19 +131,19 @@ public class DetailFragment extends Fragment
 
     public void load()
     {
-    	Cursor c = helper.getById(restaurantId);
+    	Cursor c = getHelper().getById(restaurantId);
 
     	c.moveToFirst();
-    	name.setText(helper.getName(c));
-    	address.setText(helper.getAddress(c));
-    	notes.setText(helper.getNotes(c));
-        feed.setText(helper.getFeed(c));
+    	name.setText(getHelper().getName(c));
+    	address.setText(getHelper().getAddress(c));
+    	notes.setText(getHelper().getNotes(c));
+        feed.setText(getHelper().getFeed(c));
 
-    	if(helper.getType(c).equals("sit_down"))
+    	if(getHelper().getType(c).equals("sit_down"))
     	{
     		types.check(R.id.sit_down);
     	}
-    	else if(helper.getType(c).equals("take_out"))
+    	else if(getHelper().getType(c).equals("take_out"))
     	{
     		types.check(R.id.take_out);
     	}
@@ -145,9 +152,9 @@ public class DetailFragment extends Fragment
     		types.check(R.id.delivery);
     	}
 
-        latitude = helper.getLatitude(c);
-        longitude = helper.getLongitude(c);
-        location.setText(String.valueOf(helper.getLatitude(c))+", "+String.valueOf(helper.getLongitude(c)));
+        latitude = getHelper().getLatitude(c);
+        longitude = getHelper().getLongitude(c);
+        location.setText(String.valueOf(getHelper().getLatitude(c))+", "+String.valueOf(helper.getLongitude(c)));
 
     	c.close();
     }
