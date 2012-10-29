@@ -2,6 +2,7 @@
 package csci498.ccard.lunchlist.apt.tutorial;
 
 import android.content.Intent;
+import csci498.ccard.lunchlist.LunchList;
 import csci498.ccard.lunchlist.R;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -13,5 +14,22 @@ public class DetailForm extends FragmentActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_activity);
+	}
+
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+
+		String restaurantId = getIntent().getStringExtra(LunchList.ID_EXTRA);
+
+		if (restaurantId != null) 
+		{
+			DetailFragment details = (DetailFragment)getSupportFragmentManager().findFragmentById(R.id.details);
+			if (details != null) 
+			{
+				details.loadRestaurant(restaurantId);
+			}
+		}
 	}
 }
