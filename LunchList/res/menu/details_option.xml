@@ -5,6 +5,10 @@
 android:title="RSS Feed"
 android:icon="@drawable/ic_menu_friendslist"
 />
+<item 
+    android:id="@+id/help"
+    android:title="Help"
+    android:icon="@drawable/ic_menu_help"/>
 <item android:id="@+id/location"
 	android:title="Save Location"
 	android:icon="@drawable/ic_menu_compass"/>
