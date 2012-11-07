@@ -36,6 +36,7 @@
         <activity android:name=".apt.tutorial.FeedActivity"></activity>
         <activity android:name=".apt.tutorial.RestaurantMap"></activity>
         <activity android:name=".apt.tutorial.AlarmActivity"></activity>
+        <activity android:name=".apt.tutorial.HelpPage"></activity>
         <service android:name=".apt.tutorial.FeedService"></service>
         <service android:name=".apt.tutorial.WidgetService"></service>
         <service android:name=".apt.tutorial.ListWidgetService"
