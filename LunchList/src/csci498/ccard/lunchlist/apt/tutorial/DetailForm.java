@@ -1,7 +1,6 @@
 
 package csci498.ccard.lunchlist.apt.tutorial;
 
-import android.content.Intent;
 import csci498.ccard.lunchlist.LunchList;
 import csci498.ccard.lunchlist.R;
 import android.os.Bundle;
