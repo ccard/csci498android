@@ -214,7 +214,7 @@ public class DetailFragment extends Fragment
 
             if (toDial.length() > 4) 
             {
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(toDial)));
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(toDial)));
             }
         }
         return super.onOptionsItemSelected(item);
