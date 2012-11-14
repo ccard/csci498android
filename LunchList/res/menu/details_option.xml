@@ -5,6 +5,13 @@
 android:title="RSS Feed"
 android:icon="@drawable/ic_menu_friendslist"
 />
+
+<item
+	android:id="@+id/call"
+	android:title="Call"
+	android:icon="@drawable/ic_menu_call"
+	android:enabled="false"/>
+
 <item 
     android:id="@+id/help"
     android:title="Help"

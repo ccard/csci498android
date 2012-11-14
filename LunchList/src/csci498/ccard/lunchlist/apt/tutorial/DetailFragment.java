@@ -16,6 +16,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -207,6 +208,15 @@ public class DetailFragment extends Fragment
             startActivity(new Intent(getActivity(), HelpPage.class));
             return true;
         }
+        else if (item.getItemId()  == R.id.call) 
+        {
+            String toDial = "tel:"+phone.getText().toString();
+
+            if (toDial.length() > 4) 
+            {
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(toDial)));
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -217,6 +227,11 @@ public class DetailFragment extends Fragment
         {
             menu.findItem(R.id.location).setEnabled(false);
             menu.findItem(R.id.map).setEnabled(false);
+        }
+
+        if (isTelephonyAvailable()) 
+        {
+            menu.findItem(R.id.call).setEnabled(true);
         }
 
     }
@@ -308,11 +323,11 @@ public class DetailFragment extends Fragment
     		
     		if(restaurantId == null)
     		{
-    			helper.insert(name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), feed.getText().toString());
+    			helper.insert(name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), feed.getText().toString(), phone.getText().toString());
     		}
     		else
     		{
-    			helper.update(restaurantId, name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), feed.getText().toString());
+    			helper.update(restaurantId, name.getText().toString(), address.getText().toString(), type, notes.getText().toString(), feed.getText().toString(), phone.getText().toString());
     		}
         }
 	}
