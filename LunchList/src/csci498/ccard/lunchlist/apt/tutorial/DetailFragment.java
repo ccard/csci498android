@@ -39,6 +39,7 @@ public class DetailFragment extends Fragment
 	private EditText notes = null;
     private EditText feed = null;
     private TextView location = null;
+    private EditText phone = null;
 
 	private RestaurantHelper helper;
 
@@ -126,6 +127,7 @@ public class DetailFragment extends Fragment
         notes = (EditText)getView().findViewById(R.id.notes);
         feed = (EditText)getView().findViewById(R.id.feed);
         location = (TextView)getView().findViewById(R.id.location);
+        phone = (EditText)getView().findViewById(R.id.phone);
     }
 
 

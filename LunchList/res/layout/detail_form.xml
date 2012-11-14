@@ -25,6 +25,12 @@
         </TableRow>
 
         <TableRow>
+            <TextView android:name="Phone:"/>
+            <EditText android:id="@+id/phone"
+                android:inputType="phone"/>
+        </TableRow>
+
+        <TableRow>
 
             <TextView android:text="@string/typetitle" />
 
