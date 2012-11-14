@@ -258,6 +258,11 @@ public class DetailFragment extends Fragment
         return (info != null);
     }
 
+    private boolean isTelephonyAvailable()
+    {
+        return getActivity().getPackageManager().hasSystemFeature("android.hardware.telephony");
+    }
+
     @Override
     public void onSaveInstanceState(Bundle state)
     {
